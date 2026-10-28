@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Student Admission Portal – Account</title>
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('portal_theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = saved || (prefersDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="authbox">
+        <div class="auth-nav">
+            <a href="index.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back to home</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+                <span class="sun-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </span>
+                <span class="moon-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+
+        <section class="card" data-view="login">
+            <h1>Log in</h1>
+            <p style="color:var(--text-secondary);margin-bottom:18px">Students, admission officers and administrators log in here.</p>
+            <form id="login-form">
+                <div class="msg err" role="alert"></div>
+                <div class="field">
+                    <label for="le">Email</label>
+                    <input id="le" name="email" type="email" autocomplete="username" placeholder="name@university.edu" required>
+                </div>
+                <div class="field">
+                    <label for="lp">Password</label>
+                    <input id="lp" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+                </div>
+                <button class="btn pri" style="width:100%;margin-top:8px">Log in</button>
+            </form>
+            <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--text-muted)">
+                <a href="#forgot">Forgot password?</a> · <a href="#register">Create student account</a>
+            </p>
+        </section>
+
+        <section class="card" data-view="register" hidden>
+            <h1>Create student account</h1>
+            <p style="color:var(--text-secondary);margin-bottom:18px">Sign up with your verified contact information.</p>
+            <form id="register-form">
+                <div class="msg err" role="alert"></div>
+                <div class="field">
+                    <label for="rn">Full name</label>
+                    <input id="rn" name="fullName" autocomplete="name" placeholder="Alex Rivera" required minlength="2">
+                </div>
+                <div class="field">
+                    <label for="re">Email</label>
+                    <input id="re" name="email" type="email" autocomplete="email" placeholder="alex@example.com" required>
+                </div>
+                <div class="field">
+                    <label for="rt">Phone</label>
+                    <input id="rt" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 123 4567" required pattern="[0-9+\-\s]{7,15}" title="7–15 digits">
+                </div>
+                <div class="field">
+                    <label for="rp">Password (8+ characters, letters and a number)</label>
+                    <input id="rp" name="password" type="password" autocomplete="new-password" placeholder="••••••••" required minlength="8" pattern="(?=.*[A-Za-z])(?=.*\d).{8,}" title="8+ characters with letters and a number">
+                </div>
+                <div class="field">
+                    <label for="rc">Confirm password</label>
+                    <input id="rc" name="confirm" type="password" autocomplete="new-password" placeholder="••••••••" required>
+                </div>
+                <div class="field chk" style="margin-top:6px;margin-bottom:20px">
+                    <label><input type="checkbox" name="terms" required> I confirm my details are accurate.</label>
+                </div>
+                <button class="btn pri" style="width:100%">Create account</button>
+            </form>
+            <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--text-muted)">
+                Already registered? <a href="#login" style="font-weight:600">Log in</a>
+            </p>
+        </section>
+
+        <section class="card" data-view="forgot" hidden>
+            <h1>Reset your password</h1>
+            <p style="color:var(--text-secondary);margin-bottom:18px">Enter your account email and we'll send reset instructions.</p>
+            <form id="forgot-form">
+                <div class="msg" role="alert"></div>
+                <div class="field">
+                    <label for="fe">Email</label>
+                    <input id="fe" name="email" type="email" placeholder="name@university.edu" required>
+                </div>
+                <button class="btn pri" style="width:100%;margin-top:8px">Send reset link</button>
+            </form>
+            <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--text-muted)">
+                <a href="#login">Back to login</a>
+            </p>
+        </section>
+
+        <section class="card" data-view="reset" hidden>
+            <h1>Choose a new password</h1>
+            <p style="color:var(--text-secondary);margin-bottom:18px">Create a secure password for your account.</p>
+            <form id="reset-form">
+                <div class="msg" role="alert"></div>
+                <input type="hidden" name="token">
+                <div class="field">
+                    <label for="np">New password</label>
+                    <input id="np" name="password" type="password" autocomplete="new-password" placeholder="••••••••" required minlength="8" pattern="(?=.*[A-Za-z])(?=.*\d).{8,}" title="8+ characters with letters and a number">
+                </div>
+                <div class="field">
+                    <label for="nc">Confirm password</label>
+                    <input id="nc" name="confirm" type="password" autocomplete="new-password" placeholder="••••••••" required>
+                </div>
+                <button class="btn pri" style="width:100%;margin-top:8px">Update password</button>
+            </form>
+        </section>
+
+        <div id="dev-notice"></div>
+    </div>
+    <div id="toasts" aria-live="polite"></div>
+    <script type="module" src="js/theme.js"></script>
+    <script type="module">
+        import { initAuthPage } from "./js/auth.js";
+        initAuthPage();
+    </script>
+</body>
+
+</html>

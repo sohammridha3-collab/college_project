@@ -1,0 +1,21 @@
+{
+  "name": "student-admission-portal",
+  "version": "1.0.0",
+  "description": "Student Admission Portal - Full Stack Web Application",
+  "main": "server/src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/src/server.js",
+    "dev": "node server/src/server.js",
+    "seed": "node server/src/scripts/seed.js",
+    "test": "node server/src/scripts/testJourneys.js"
+  },
+  "keywords": [
+    "admission",
+    "portal",
+    "student",
+    "college"
+  ],
+  "author": "",
+  "license": "ISC"
+}
