@@ -5,10 +5,12 @@
   "main": "server/src/server.js",
   "type": "module",
   "scripts": {
+    "postinstall": "npm install --prefix server",
+    "build": "npm install --prefix server",
     "start": "node server/src/server.js",
     "dev": "node server/src/server.js",
-    "seed": "node server/src/scripts/seed.js",
-    "test": "node server/src/scripts/testJourneys.js"
+    "seed": "npm run seed --prefix server",
+    "test": "npm test --prefix server"
   },
   "keywords": [
     "admission",
