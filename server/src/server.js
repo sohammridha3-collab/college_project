@@ -25,6 +25,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || "0.0.0.0";
 
 // Security Headers (MIME sniffing prevention, clickjacking defense, XSS protection)
 app.use((req, res, next) => {
@@ -110,7 +111,7 @@ app.get("/portal", (req, res) => res.sendFile(path.join(clientRoot, "portal.html
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, async () => {
+app.listen(PORT, HOST, async () => {
   console.log(`=======================================================`);
   console.log(`🚀 Student Admission Portal API & Web Server running!`);
   console.log(`🌐 Web App:     http://localhost:${PORT}`);

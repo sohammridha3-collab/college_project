@@ -4,11 +4,11 @@ const getBaseUrl = () => {
     return window.__API_BASE_URL__;
   }
   if (typeof location !== "undefined") {
-    if (location.port === "3000" || location.port === "80" || location.port === "443") {
+    const isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+    if (!isLocalhost || location.port === "" || location.port === "3000" || location.port === "80" || location.port === "443") {
       return "/api";
     }
-    const host = location.hostname || "localhost";
-    return `http://${host}:3000/api`;
+    return `http://${location.hostname}:3000/api`;
   }
   return "http://localhost:3000/api";
 };

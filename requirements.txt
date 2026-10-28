@@ -1,0 +1,10 @@
+# Student Admission Portal
+# ------------------------------------------------------------------------------
+# NOTE: This is a full-stack Node.js / Express application.
+# The primary runtime for production deployment on Render is Node.
+#
+# Recommended Render Settings:
+#   Runtime:       Node
+#   Build Command: npm run build
+#   Start Command: npm start
+# ------------------------------------------------------------------------------

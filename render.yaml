@@ -1,7 +1,7 @@
 services:
   - type: web
     name: student-admission-portal
-    runtime: node
+    env: node
     plan: free
     buildCommand: npm run build
     startCommand: npm start
