@@ -38,6 +38,7 @@ app.use((req, res, next) => {
 
 // CORS configuration supporting credentials and all local dev origins (5500, 5501, 3000, 5173, etc.)
 const defaultOrigins = [
+  "https://college-project-backend-1.onrender.com",
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "http://localhost:3000",

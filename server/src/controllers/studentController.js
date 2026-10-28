@@ -397,7 +397,8 @@ export async function verifyGatewayCallback(req, res, next) {
     await activePaymentGateway.verifyTransactionServerSide(ref, token);
 
     // Redirect to frontend portal payment view
-    const clientBase = process.env.CLIENT_URL || "http://localhost:5173";
+    const defaultClient = process.env.NODE_ENV === "production" ? "https://college-project-backend-1.onrender.com" : "http://localhost:3000";
+    const clientBase = process.env.CLIENT_URL || req.headers.origin || defaultClient;
     return res.redirect(`${clientBase.replace(/\/$/, "")}/portal.html#/payment`);
   } catch (err) {
     return res.status(400).send(`Payment verification failed: ${err.message}`);

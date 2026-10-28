@@ -151,7 +151,7 @@ export function initAuthPage() {
           Cannot reach <code>${API_BASE_URL}</code>.
         </p>
         <p style="font-size:12px;margin:0;color:var(--text-secondary)">
-          <b>How to start:</b> Run <code>npm start</code> in project root, double-click <code>start-portal.bat</code>, or open <a href="http://localhost:3000" style="color:var(--primary)">http://localhost:3000</a>.
+          <b>Backend server:</b> Ensure the server is online. For local dev, run <code>npm start</code> or double-click <code>start-portal.bat</code>.
         </p>
       </div>
     `;

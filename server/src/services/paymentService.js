@@ -31,7 +31,8 @@ export class MockPaymentGateway extends PaymentGatewayInterface {
     );
 
     // Provide a callback endpoint that simulates gateway return
-    const checkoutUrl = `${clientBaseUrl || "http://localhost:3000"}/api/student/payments/verify-gateway?ref=${txRef}&token=${token}`;
+    const defaultBaseUrl = process.env.NODE_ENV === "production" ? "https://college-project-backend-1.onrender.com" : "http://localhost:3000";
+    const checkoutUrl = `${(clientBaseUrl || process.env.CLIENT_URL || defaultBaseUrl).replace(/\/$/, "")}/api/student/payments/verify-gateway?ref=${txRef}&token=${token}`;
 
     return {
       transactionReference: txRef,

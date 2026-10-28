@@ -1,16 +1,53 @@
-/* Central API configuration module. Dynamic origin resolution for production & local dev. */
-const getBaseUrl = () => {
+/* ==============================================================================
+ * Central API Configuration Module
+ * ------------------------------------------------------------------------------
+ * Production Deployed Backend: https://college-project-backend-1.onrender.com
+ * Local Development Fallback:  http://localhost:3000
+ * ============================================================================== */
+
+export const PRODUCTION_BACKEND_URL = "https://college-project-backend-1.onrender.com";
+export const LOCAL_BACKEND_URL = "http://localhost:3000";
+
+/**
+ * Dynamically resolves the API base URL.
+ * - In production: connects to https://college-project-backend-1.onrender.com/api
+ *   (or relative /api if served directly by the production backend).
+ * - In local dev: defaults to http://localhost:3000/api
+ *   (or allows ?backend=prod to test against the deployed Render backend locally).
+ */
+export const getBaseUrl = () => {
+  // 1. Explicit window override (e.g. injected in HTML or build step)
   if (typeof window !== "undefined" && window.__API_BASE_URL__) {
-    return window.__API_BASE_URL__;
+    const custom = window.__API_BASE_URL__.replace(/\/$/, "");
+    return custom.endsWith("/api") ? custom : `${custom}/api`;
   }
+
   if (typeof location !== "undefined") {
     const isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-    if (!isLocalhost || location.port === "" || location.port === "3000" || location.port === "80" || location.port === "443") {
+
+    // 2. Local development fallback
+    if (isLocalhost) {
+      const params = new URLSearchParams(location.search);
+      const useProd = params.get("backend") === "prod" ||
+                      params.get("env") === "production" ||
+                      localStorage.getItem("portal_backend") === "production";
+      if (useProd) {
+        return `${PRODUCTION_BACKEND_URL}/api`;
+      }
+      if (location.port === "3000") {
+        return "/api";
+      }
+      return `${LOCAL_BACKEND_URL}/api`;
+    }
+
+    // 3. Production environment
+    if (location.origin === PRODUCTION_BACKEND_URL) {
       return "/api";
     }
-    return `http://${location.hostname}:3000/api`;
+    return `${PRODUCTION_BACKEND_URL}/api`;
   }
-  return "http://localhost:3000/api";
+
+  return `${PRODUCTION_BACKEND_URL}/api`;
 };
 
 export const API_BASE_URL = getBaseUrl();
