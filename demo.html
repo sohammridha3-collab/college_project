@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Cinematic Visual Demo | Student Admission Management Portal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Preconnect & High-Impact Display Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icon Font -->
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+
+    <!-- Cinematic Design System -->
+    <link rel="stylesheet" href="css/cinematic.css">
+</head>
+
+<body>
+    <!-- Background Canvas Engine (Reflective Ribbons & Particles) -->
+    <div class="canvas-backdrop" aria-hidden="true">
+        <canvas id="ribbon-canvas"></canvas>
+        <canvas id="particle-canvas"></canvas>
+    </div>
+    <div class="cinematic-vignette" aria-hidden="true"></div>
+
+    <!-- Foreground Content Layer -->
+    <div class="cinema-layer">
+        <!-- Floating Cinematic Navigation -->
+        <nav class="cinema-nav" aria-label="Cinematic Demo Navigation">
+            <div class="nav-container">
+                <a href="demo.html" class="brand-crest" aria-label="Cinematic Admission Portal Demo">
+                    <div class="crest-icon-box">
+                        <i data-lucide="sparkles" style="width:20px;height:20px"></i>
+                    </div>
+                    <span class="brand-text">ADMISSION PORTAL</span>
+                    <span class="brand-tag">CINEMATIC DEMO</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="#showcase" class="nav-link">Workflows</a>
+                    <a href="#process" class="nav-link">Admissions Pipeline</a>
+                    <a href="#architecture" class="nav-link">Stack Telemetry</a>
+                    <a href="index.html" class="nav-link" title="Return to production portal homepage">Classic Portal ↗</a>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="api-status-pill" id="api-health-status">
+                        <span class="pulse-dot"></span> Checking API...
+                    </div>
+                    <a href="auth.html?role=student#login" class="cinema-btn sm metallic">Log In</a>
+                    <a href="auth.html?role=student#register" class="cinema-btn sm pri">Apply Now</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section with Oversized Typography -->
+        <header class="cinema-hero">
+            <div class="cinema-kicker">
+                <span class="kicker-flame">🔥</span> Admissions Open Academic Year 2026–2027
+            </div>
+
+            <h1 class="cinema-display-title">
+                <span class="text-metallic">FUTURE OF</span><br>
+                <span class="text-fire">ADMISSIONS</span>
+            </h1>
+
+            <p class="cinema-subtitle">
+                An isolated cinematic visual scaffold for the <strong>Student Admission Management System</strong>.
+                Engineered with reflective metallic aesthetics, interactive particle transformations, 
+                and a guaranteed <strong>₹0.00 zero application fee</strong> policy.
+            </p>
+
+            <div class="hero-actions">
+                <a href="auth.html?role=student#register" class="cinema-btn lg pri">
+                    <i data-lucide="graduation-cap" style="width:18px;height:18px"></i>
+                    Create Student Account
+                </a>
+                <a href="auth.html?role=officer#login" class="cinema-btn lg metallic">
+                    <i data-lucide="shield-check" style="width:18px;height:18px"></i>
+                    Officer Console
+                </a>
+                <a href="#showcase" class="cinema-btn lg ghost">
+                    Explore Role Workflows ↓
+                </a>
+            </div>
+
+            <!-- Stats & Telemetry Strip -->
+            <div class="cinema-stats-strip">
+                <div class="cinema-stat-card">
+                    <div class="stat-label">
+                        <i data-lucide="tag" style="width:14px;height:14px;color:var(--cinema-orange-bright)"></i> Fee Policy
+                    </div>
+                    <div class="stat-val highlight">₹0.00</div>
+                    <div class="stat-detail">100% Free Application Fee (Waived)</div>
+                </div>
+
+                <div class="cinema-stat-card">
+                    <div class="stat-label">
+                        <i data-lucide="users" style="width:14px;height:14px;color:var(--cinema-orange-bright)"></i> Architecture
+                    </div>
+                    <div class="stat-val">3 ROLES</div>
+                    <div class="stat-detail">Applicant · Officer · Administrator</div>
+                </div>
+
+                <div class="cinema-stat-card">
+                    <div class="stat-label">
+                        <i data-lucide="file-check-2" style="width:14px;height:14px;color:var(--cinema-orange-bright)"></i> Document Vault
+                    </div>
+                    <div class="stat-val">PERSISTENT</div>
+                    <div class="stat-detail">Inline PDF & Photo View / Download</div>
+                </div>
+
+                <div class="cinema-stat-card">
+                    <div class="stat-label">
+                        <i data-lucide="cpu" style="width:14px;height:14px;color:var(--cinema-orange-bright)"></i> Technology Stack
+                    </div>
+                    <div class="stat-val">ZERO BLOAT</div>
+                    <div class="stat-detail">HTML5 · CSS3 · Vanilla JS · Node.js</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Role Transformation Console -->
+        <section id="showcase" class="cinema-section">
+            <div class="section-header-centered">
+                <div class="section-tag">01 // ROLE TRANSFORMATION MATRIX</div>
+                <h2 class="section-title">Tri-Portal System Command</h2>
+                <p class="section-desc">
+                    Switch between roles to observe real-time particle transformations, metallic ribbon morphing, 
+                    and integrated admission workflows.
+                </p>
+            </div>
+
+            <!-- Role Selector Tabs -->
+            <div class="role-tabs-wrap">
+                <div class="role-tabs">
+                    <button class="role-tab-btn active" data-role="applicant" type="button">
+                        <i data-lucide="graduation-cap" style="width:16px;height:16px"></i>
+                        <span>Applicant (Student)</span>
+                        <span class="tab-badge">01</span>
+                    </button>
+                    <button class="role-tab-btn" data-role="officer" type="button">
+                        <i data-lucide="clipboard-check" style="width:16px;height:16px"></i>
+                        <span>Admission Officer</span>
+                        <span class="tab-badge">02</span>
+                    </button>
+                    <button class="role-tab-btn" data-role="admin" type="button">
+                        <i data-lucide="shield" style="width:16px;height:16px"></i>
+                        <span>Administrator</span>
+                        <span class="tab-badge">03</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Console Box -->
+            <div class="console-box">
+                <!-- Panel 1: Applicant -->
+                <div class="console-panel active" id="panel-applicant">
+                    <div class="console-layout">
+                        <div class="console-content">
+                            <span class="brand-tag" style="margin-bottom:14px;display:inline-block">STUDENT APPLICANT WORKFLOW</span>
+                            <h3>Complete Your Admission Profile</h3>
+                            <p>
+                                Students can create accounts, submit qualification details, upload academic certificates, 
+                                and follow verification decisions in real time with zero application charges.
+                            </p>
+                            
+                            <ul class="feature-checklist">
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Zero-Fee Checkout:</strong> Instant application processing with ₹0.00 waived status.</span>
+                                </li>
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Secure Document Vault:</strong> Persistent storage with inline PDF viewer and instant download.</span>
+                                </li>
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Milestone Timeline:</strong> Transparent tracking from draft to final admission offer.</span>
+                                </li>
+                            </ul>
+
+                            <div style="display:flex;gap:12px;flex-wrap:wrap">
+                                <a href="auth.html?role=student#register" class="cinema-btn pri">Create Student Account</a>
+                                <a href="auth.html?role=student#login" class="cinema-btn metallic">Applicant Sign In</a>
+                                <button type="button" class="cinema-btn ghost btn-open-doc-modal">Preview Document Vault ↗</button>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Pipeline Step Tracker -->
+                        <div class="mock-preview-frame">
+                            <div class="preview-bar">
+                                <div class="preview-dots">
+                                    <div class="dot red"></div>
+                                    <div class="dot yellow"></div>
+                                    <div class="dot green"></div>
+                                </div>
+                                <div class="preview-title">applicant_pipeline.live</div>
+                                <div><i data-lucide="activity" style="width:14px;height:14px;color:#27c93f"></i></div>
+                            </div>
+                            <div class="preview-body">
+                                <div class="pipeline-track">
+                                    <div class="pipeline-step complete">
+                                        <div class="step-left">
+                                            <div class="step-circle">✓</div>
+                                            <div class="step-info">
+                                                <b>Account Registration</b>
+                                                <span>Personal details & verified credentials</span>
+                                            </div>
+                                        </div>
+                                        <span class="brand-tag" style="background:rgba(39,201,63,0.15);color:#27c93f;border-color:rgba(39,201,63,0.3)">DONE</span>
+                                    </div>
+
+                                    <div class="pipeline-step complete">
+                                        <div class="step-left">
+                                            <div class="step-circle">✓</div>
+                                            <div class="step-info">
+                                                <b>Program Selection & Statement</b>
+                                                <span>Computer Science B.Sc. · Westlake Academy</span>
+                                            </div>
+                                        </div>
+                                        <span class="brand-tag" style="background:rgba(39,201,63,0.15);color:#27c93f;border-color:rgba(39,201,63,0.3)">SAVED</span>
+                                    </div>
+
+                                    <div class="pipeline-step complete">
+                                        <div class="step-left">
+                                            <div class="step-circle">✓</div>
+                                            <div class="step-info">
+                                                <b>Application Fee Settlement</b>
+                                                <span>Fee Policy: ₹0.00 (Fee Waived)</span>
+                                            </div>
+                                        </div>
+                                        <span class="brand-tag" style="background:rgba(39,201,63,0.15);color:#27c93f;border-color:rgba(39,201,63,0.3)">WAIVED</span>
+                                    </div>
+
+                                    <div class="pipeline-step active">
+                                        <div class="step-left">
+                                            <div class="step-circle">04</div>
+                                            <div class="step-info">
+                                                <b>Document Verification Vault</b>
+                                                <span>Transcript.pdf & Photo.png attached</span>
+                                            </div>
+                                        </div>
+                                        <span class="brand-tag">IN REVIEW</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 2: Officer -->
+                <div class="console-panel" id="panel-officer">
+                    <div class="console-layout">
+                        <div class="console-content">
+                            <span class="brand-tag" style="margin-bottom:14px;display:inline-block">OFFICER COMMAND WORKFLOW</span>
+                            <h3>Evaluate & Authenticate Applications</h3>
+                            <p>
+                                Admission Officers access applicant queues, review uploaded transcripts, record entrance 
+                                exam scores, and publish official admission decisions with full audit accountability.
+                            </p>
+                            
+                            <ul class="feature-checklist">
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Document Verification:</strong> Inspect transcripts and certify them with custom remarks.</span>
+                                </li>
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Examination Scoring:</strong> Enter normalized entrance exam results and percentiles.</span>
+                                </li>
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Decision Dispatch:</strong> Approve, waitlist, or reject with immediate automated notifications.</span>
+                                </li>
+                            </ul>
+
+                            <div style="display:flex;gap:12px;flex-wrap:wrap">
+                                <a href="auth.html?role=officer#login" class="cinema-btn pri">Officer Portal Login</a>
+                                <button type="button" class="cinema-btn metallic btn-open-doc-modal">Inspect Sample Transcript ↗</button>
+                            </div>
+                        </div>
+
+                        <!-- Mock Officer Queue -->
+                        <div class="mock-preview-frame">
+                            <div class="preview-bar">
+                                <div class="preview-dots">
+                                    <div class="dot red"></div>
+                                    <div class="dot yellow"></div>
+                                    <div class="dot green"></div>
+                                </div>
+                                <div class="preview-title">officer_queue.review</div>
+                                <div style="font-size:0.75rem;color:var(--cinema-orange-bright);font-weight:700">3 PENDING</div>
+                            </div>
+                            <div class="preview-body" style="padding:18px">
+                                <div style="background:rgba(255,255,255,0.03);border:1px solid var(--cinema-metallic-hairline);border-radius:14px;padding:16px;margin-bottom:12px">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                                        <b style="color:#fff;font-size:0.95rem">Alex Rivera</b>
+                                        <span class="brand-tag">APP-2026-8257</span>
+                                    </div>
+                                    <p style="font-size:0.8rem;color:var(--cinema-text-med);margin-bottom:12px">Program: Mechanical Engineering B.Sc. · Score: 94.2%</p>
+                                    <div style="display:flex;gap:8px">
+                                        <span style="font-size:0.75rem;padding:4px 8px;border-radius:6px;background:rgba(39,201,63,0.15);color:#27c93f">Docs: Verified</span>
+                                        <span style="font-size:0.75rem;padding:4px 8px;border-radius:6px;background:rgba(255,87,34,0.15);color:var(--cinema-orange-bright)">Exam: 91.5 (Pass)</span>
+                                    </div>
+                                </div>
+                                <div style="display:flex;gap:10px;justify-content:flex-end">
+                                    <a href="auth.html?role=officer#login" class="cinema-btn sm pri" style="width:100%">Open Verification Console</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 3: Admin -->
+                <div class="console-panel" id="panel-admin">
+                    <div class="console-layout">
+                        <div class="console-content">
+                            <span class="brand-tag" style="margin-bottom:14px;display:inline-block">ADMINISTRATOR GOVERNANCE</span>
+                            <h3>System Telemetry & Institutional Policy</h3>
+                            <p>
+                                Oversee institutional admission statistics, govern user credentials across all roles, 
+                                enforce zero-fee admission policies, and export comprehensive audit log streams.
+                            </p>
+                            
+                            <ul class="feature-checklist">
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Fee Governance:</strong> Application fee policy permanently locked at ₹0.00.</span>
+                                </li>
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Comprehensive Audit Trail:</strong> Immutable timestamped logging of all decisions.</span>
+                                </li>
+                                <li class="checklist-item">
+                                    <i data-lucide="check-circle" class="check-icon" style="width:18px;height:18px"></i>
+                                    <span><strong>Institutional Reports:</strong> One-click export of applicant rosters and status summaries.</span>
+                                </li>
+                            </ul>
+
+                            <div style="display:flex;gap:12px;flex-wrap:wrap">
+                                <a href="auth.html?role=admin#login" class="cinema-btn pri">Administrator Login</a>
+                                <a href="portal.html" class="cinema-btn metallic">Launch Full Portal</a>
+                            </div>
+                        </div>
+
+                        <!-- Mock Admin Telemetry -->
+                        <div class="mock-preview-frame">
+                            <div class="preview-bar">
+                                <div class="preview-dots">
+                                    <div class="dot red"></div>
+                                    <div class="dot yellow"></div>
+                                    <div class="dot green"></div>
+                                </div>
+                                <div class="preview-title">admin_telemetry.realtime</div>
+                                <div><i data-lucide="shield" style="width:14px;height:14px;color:var(--cinema-orange-bright)"></i></div>
+                            </div>
+                            <div class="preview-body" style="padding:18px">
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+                                    <div style="background:rgba(255,255,255,0.03);border:1px solid var(--cinema-metallic-hairline);border-radius:10px;padding:12px">
+                                        <span style="font-size:0.7rem;color:var(--cinema-text-low);text-transform:uppercase">Fee Rule</span>
+                                        <div style="font-size:1.1rem;font-weight:800;color:#27c93f">₹0.00 (Free)</div>
+                                    </div>
+                                    <div style="background:rgba(255,255,255,0.03);border:1px solid var(--cinema-metallic-hairline);border-radius:10px;padding:12px">
+                                        <span style="font-size:0.7rem;color:var(--cinema-text-low);text-transform:uppercase">Audit Events</span>
+                                        <div style="font-size:1.1rem;font-weight:800;color:#fff">250+ Logged</div>
+                                    </div>
+                                </div>
+                                <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cinema-text-med);line-height:1.5;background:#030305;padding:10px;border-radius:8px;border:1px solid var(--cinema-metallic-hairline)">
+                                    <div style="color:var(--cinema-orange-bright)">[2026-10-29] POLICY_CONFIRMED: Fee set to ₹0.00</div>
+                                    <div>[2026-10-29] OFFICER_REVIEW: App #46 verified</div>
+                                    <div>[2026-10-29] SYSTEM_HEALTH: Up and running (100%)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Oversized Process Grid (01 - 04) -->
+        <section id="process" class="cinema-section">
+            <div class="section-header-centered">
+                <div class="section-tag">02 // ADMISSION PIPELINE GUIDANCE</div>
+                <h2 class="section-title">How the Admission Process Operates</h2>
+                <p class="section-desc">
+                    A streamlined four-stage journey from enrollment to qualification authentication.
+                </p>
+            </div>
+
+            <div class="cinema-process-grid">
+                <div class="process-card">
+                    <span class="oversized-num">01</span>
+                    <h4>Create Account</h4>
+                    <p>
+                        Register with your email and basic contact details to immediately activate your personal admission dashboard.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <span class="oversized-num">02</span>
+                    <h4>Fill Application</h4>
+                    <p>
+                        Select your desired academic program and record qualifying exam percentiles. No application fee is required.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <span class="oversized-num">03</span>
+                    <h4>Upload Documents</h4>
+                    <p>
+                        Upload certified academic transcripts and biometric photos directly to our persistent, encrypted document vault.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <span class="oversized-num">04</span>
+                    <h4>Track Decisions</h4>
+                    <p>
+                        Follow officer document reviews, examination scoring, and official admission offers in real time.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack & Architecture Telemetry -->
+        <section id="architecture" class="cinema-section">
+            <div class="section-header-centered">
+                <div class="section-tag">03 // ARCHITECTURAL TELEMETRY</div>
+                <h2 class="section-title">Full Stack Engineering</h2>
+                <p class="section-desc">
+                    Confirmation of the confirmed production stack powering the portal with zero framework overhead.
+                </p>
+            </div>
+
+            <div class="console-box" style="padding:28px">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:20px">
+                    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--cinema-metallic-hairline);border-radius:16px;padding:20px">
+                        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cinema-orange-bright);margin-bottom:8px">FRONTEND</div>
+                        <h4 style="font-size:1.1rem;color:#fff;margin-bottom:6px">HTML5 · CSS3 · ES Modules</h4>
+                        <p style="font-size:0.82rem;color:var(--cinema-text-med)">Vanilla JavaScript client with zero React/bundler bloat, ultra-low bundle footprint, and native responsive design.</p>
+                    </div>
+
+                    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--cinema-metallic-hairline);border-radius:16px;padding:20px">
+                        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cinema-orange-bright);margin-bottom:8px">BACKEND</div>
+                        <h4 style="font-size:1.1rem;color:#fff;margin-bottom:6px">Node.js · Express.js</h4>
+                        <p style="font-size:0.82rem;color:var(--cinema-text-med)">RESTful API server with JWT authentication, role-based authorization guards, and stream-safe file handlers.</p>
+                    </div>
+
+                    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--cinema-metallic-hairline);border-radius:16px;padding:20px">
+                        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cinema-orange-bright);margin-bottom:8px">DATABASE</div>
+                        <h4 style="font-size:1.1rem;color:#fff;margin-bottom:6px">MySQL Dual-Engine</h4>
+                        <p style="font-size:0.82rem;color:var(--cinema-text-med)">Robust MySQL persistence with automated migrations and graceful persistent JSON fallback for localized dev.</p>
+                    </div>
+
+                    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--cinema-metallic-hairline);border-radius:16px;padding:20px">
+                        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cinema-orange-bright);margin-bottom:8px">SECURITY & SEO</div>
+                        <h4 style="font-size:1.1rem;color:#fff;margin-bottom:6px">Canonical & Noindex Shield</h4>
+                        <p style="font-size:0.82rem;color:var(--cinema-text-med)">Authoritative frontend canonical metadata with comprehensive X-Robots-Tag noindex boundaries for all internal portals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Document Vault Interactive Preview Modal -->
+        <div class="cinema-modal-backdrop" id="cinema-doc-modal" aria-hidden="true" role="dialog" aria-modal="true">
+            <div class="cinema-modal">
+                <div class="modal-header">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <i data-lucide="file-text" style="color:var(--cinema-orange-bright);width:20px;height:20px"></i>
+                        <h3 class="modal-title">Document Inspection Vault</h3>
+                    </div>
+                    <button class="modal-close-btn" id="btn-close-modal" type="button" aria-label="Close modal">
+                        <i data-lucide="x" style="width:20px;height:20px"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="display:flex;gap:8px;margin-bottom:16px">
+                        <button class="cinema-btn sm metallic active" id="tab-doc-pdf" type="button">Transcript (PDF)</button>
+                        <button class="cinema-btn sm metallic" id="tab-doc-img" type="button">Passport Photo (PNG)</button>
+                    </div>
+
+                    <div class="doc-preview-pane" id="modal-doc-viewer">
+                        <!-- Injected dynamically via js/cinematic.js -->
+                    </div>
+
+                    <div class="modal-actions">
+                        <a href="portal.html" class="cinema-btn pri sm">Open Full Dashboard Vault →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Semantic Cinematic Footer -->
+        <footer class="cinema-footer">
+            <div class="footer-top">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <div class="crest-icon-box" style="width:34px;height:34px">
+                        <i data-lucide="sparkles" style="width:18px;height:18px"></i>
+                    </div>
+                    <div>
+                        <b style="color:#fff;font-family:var(--font-display);font-size:1.1rem">Student Admission Portal</b>
+                        <p style="font-size:0.8rem;color:var(--cinema-text-med);margin:0">Cinematic Visual Demo · Academic Year 2026–2027</p>
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <a href="auth.html?role=student#register" class="footer-link">Apply Online</a>
+                    <a href="auth.html?role=student#login" class="footer-link">Student Login</a>
+                    <a href="auth.html?role=officer#login" class="footer-link">Officer Login</a>
+                    <a href="auth.html?role=admin#login" class="footer-link">Administrator Login</a>
+                    <a href="portal.html" class="footer-link">Portal Dashboard</a>
+                    <a href="index.html" class="footer-link">Classic Portal</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    Online College Admission Management System · Free Application Fee Policy (₹0.00) · All private student documents protected with strict role-based access control.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/cinematic.js"></script>
+</body>
+
+</html>

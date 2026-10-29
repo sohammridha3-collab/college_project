@@ -87,13 +87,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Crawler Protection: Inject X-Robots-Tag for private APIs, auth, portals, and documents
+// Crawler Protection: Inject X-Robots-Tag for private APIs, auth, portals, documents, and demo scaffold
 app.use((req, res, next) => {
   const p = req.path.toLowerCase();
   if (
     p.startsWith("/api") ||
     p.startsWith("/portal") ||
     p.startsWith("/auth") ||
+    p.startsWith("/demo") ||
     p.startsWith("/uploads") ||
     p.startsWith("/server")
   ) {
@@ -147,12 +148,13 @@ app.use(express.static(clientRoot));
 app.get("/", (req, res) => res.sendFile(path.join(clientRoot, "index.html")));
 app.get("/auth", (req, res) => res.sendFile(path.join(clientRoot, "auth.html")));
 app.get("/portal", (req, res) => res.sendFile(path.join(clientRoot, "portal.html")));
+app.get("/demo", (req, res) => res.sendFile(path.join(clientRoot, "demo.html")));
 
 // Centralized Error Handler
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, HOST, async () => {
+export const server = app.listen(PORT, HOST, async () => {
   console.log(`=======================================================`);
   console.log(`🚀 Student Admission Portal API & Web Server running!`);
   console.log(`🌐 Web App:     http://localhost:${PORT}`);

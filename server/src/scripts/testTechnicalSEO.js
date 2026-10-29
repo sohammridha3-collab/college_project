@@ -26,9 +26,11 @@ async function run() {
   console.log("=======================================================\n");
 
   // Ensure server is up
+  let srvInstance = null;
   const initialCheck = await fetch(`${BASE_URL}/api/health`).catch(() => null);
   if (!initialCheck || !initialCheck.ok) {
-    await import("../server.js");
+    const srvMod = await import("../server.js");
+    srvInstance = srvMod.server;
   }
 
   // 1. Static Metadata Verification (index.html)
@@ -185,9 +187,11 @@ async function run() {
   console.log(`🏁 TECHNICAL SEO TEST RESULTS: ${testsPassed} PASSED, ${testsFailed} FAILED`);
   console.log("=======================================================");
 
-  setTimeout(() => {
-    process.exit(testsFailed > 0 ? 1 : 0);
-  }, 50);
+  process.exitCode = testsFailed > 0 ? 1 : 0;
+  if (srvInstance) {
+    srvInstance.closeAllConnections?.();
+    srvInstance.close();
+  }
 }
 
 run().catch(err => {
