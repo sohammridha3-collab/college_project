@@ -163,7 +163,7 @@ function buildRibbonGeometry(points, sides, { width, thickness, curl, twist, rad
 }
 
 // ---------- Bundle Definition & Ribbon Builder ----------
-function buildBundle(cfg, materials, collectedSplinePoints) {
+function buildBundle(cfg, materials, collectedSplinePoints, { samplesMultiplier = 1.0, radialSegments = 18 } = {}) {
   const {
     control,
     count,
@@ -176,9 +176,10 @@ function buildBundle(cfg, materials, collectedSplinePoints) {
     sheetPhase = 0,
     fan = 0.35,
     depthJitter = 0.12,
-    twistAmp = 0.35,
-    samples = 360
+    twistAmp = 0.35
   } = cfg;
+
+  const samples = Math.max(90, Math.floor((cfg.samples || 360) * samplesMultiplier));
 
   const rand = mulberry32(seed);
   const curve = new THREE.CatmullRomCurve3(
@@ -268,7 +269,8 @@ function buildBundle(cfg, materials, collectedSplinePoints) {
       width: widths[k],
       thickness,
       curl,
-      twist: t => twAmp * Math.sin(t * Math.PI * 2 * twFreq + twPhase)
+      twist: t => twAmp * Math.sin(t * Math.PI * 2 * twFreq + twPhase),
+      radial: radialSegments
     });
 
     const mat = materials[Math.floor(rand() * materials.length)];
@@ -333,16 +335,21 @@ function init() {
   // Reduced-motion detection
   const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Hardware & device capability detection for adaptive performance
+  const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth < 768);
+  const isLowPower = isMobile || (typeof navigator !== "undefined" && ((navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || (navigator.deviceMemory && navigator.deviceMemory <= 4)));
+
   let renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: !isLowPower, powerPreference: "high-performance" });
   } catch (err) {
     container.classList.add("no-webgl");
     console.warn("[opening-scene] WebGL unavailable, static fallback active.", err);
     return;
   }
 
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const maxDpr = isLowPower ? 1.25 : 2.0;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -407,8 +414,13 @@ function init() {
   const world = new THREE.Group();
   const bundleGroups = [];
 
+  const bundleOptions = {
+    samplesMultiplier: isLowPower ? 0.5 : 1.0,
+    radialSegments: isLowPower ? 12 : 18
+  };
+
   BUNDLES.forEach(b => {
-    const bg = buildBundle(b, materials[b.mat], collectedSplinePoints);
+    const bg = buildBundle(b, materials[b.mat], collectedSplinePoints, bundleOptions);
     bundleGroups.push(bg);
     world.add(bg);
   });
@@ -426,7 +438,7 @@ function init() {
   // ==============================================================================
   // STAGE 3 PARTICLE WAVE SYSTEM (THREE.Points)
   // ==============================================================================
-  const PARTICLE_COUNT = 9200;
+  const PARTICLE_COUNT = isLowPower ? 3600 : 9200;
   const pRand = mulberry32(777);
 
   const particleGeometry = new THREE.BufferGeometry();
@@ -562,6 +574,7 @@ function init() {
   } else {
     window.addEventListener("resize", resize);
   }
+  window.addEventListener("orientationchange", () => setTimeout(resize, 150));
   resize();
 
   container.dataset.sceneReady = "true";
@@ -578,6 +591,16 @@ function init() {
     if (prefersReducedMotion) {
       renderer.render(scene, camera);
       return;
+    }
+
+    // Viewport Culling & Battery Conservation:
+    // Skip processing if tab is backgrounded or opening section has scrolled off-screen
+    if (document.hidden) return;
+    if (track) {
+      const rect = track.getBoundingClientRect();
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
+        return;
+      }
     }
 
     time += 0.006;
