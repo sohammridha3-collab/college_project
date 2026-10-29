@@ -20,3 +20,4 @@ Disallow: /uploads/
 Disallow: /server/
 
 Sitemap: https://college-project-backend-1.onrender.com/sitemap.xml
+
