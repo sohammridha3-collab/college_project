@@ -61,13 +61,14 @@ html {
   overflow-x: hidden;
 }
 
-[data-theme="dark"] html,
+html[data-theme="dark"],
+html:has(body.cinema-demo-page),
 body.cinema-demo-page {
   background-color: var(--cinema-bg-void);
   color: var(--cinema-text-high);
 }
 
-[data-theme="dark"] body,
+html[data-theme="dark"] body,
 body.cinema-demo-page {
   min-height: 100vh;
   position: relative;
@@ -198,6 +199,7 @@ body.cinema-demo-page {
   letter-spacing: -0.01em;
   background: var(--cinema-metallic-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -413,6 +415,7 @@ body.cinema-demo-page {
 .text-metallic {
   background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 55%, #64748b 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   filter: drop-shadow(0 2px 14px rgba(255, 255, 255, 0.15));
@@ -421,6 +424,7 @@ body.cinema-demo-page {
 .text-fire {
   background: linear-gradient(135deg, #ffffff 0%, #ffab00 25%, #ff3b00 65%, #ff1744 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   position: relative;
@@ -516,6 +520,7 @@ body.cinema-demo-page {
   letter-spacing: -0.02em;
   background: var(--cinema-metallic-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.1;
   margin-bottom: 6px;
@@ -524,6 +529,7 @@ body.cinema-demo-page {
 .stat-val.highlight {
   background: var(--cinema-fire-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1044,6 +1050,15 @@ body.cinema-demo-page {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .opening-track {
+    height: 100vh !important;
+  }
+  .opening-scene {
+    position: relative !important;
+  }
+  .opening-scroll-hint {
+    display: none !important;
+  }
 }
 
 
@@ -1218,64 +1233,21 @@ body.cinema-demo-page {
   .cinema-nav .nav-links { display: none; }
 }
 
-@media (max-width: 680px) {
-  .cinema-nav .api-status-pill,
-  .cinema-nav .brand-tag { display: none; }
-  .nav-container { padding: 12px 14px; }
-  .opening-scene {
-    height: calc(100vh - 108px);
-    height: calc(100svh - 108px);
-    min-height: 440px;
-  }
-  .opening-copy {
-    left: 14px;
-    right: 14px;
-    bottom: 16px;
-    max-width: calc(100vw - 28px);
-  }
-  .opening-title {
-    font-size: clamp(2.1rem, 7.5vw, 2.9rem);
-    margin-bottom: 8px;
-    line-height: 0.95;
-  }
-  .opening-lede {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    max-width: 30ch;
-  }
-  .opening-actions {
-    gap: 8px;
-    margin-top: 12px !important;
-  }
-  .opening-actions .btn {
-    padding: 9px 18px !important;
-    font-size: 13px !important;
-    min-height: 40px;
-  }
-  .opening-scroll-hint {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .opening-track {
-    height: 100vh !important;
-  }
-  .opening-scene {
-    position: relative !important;
-  }
-  .opening-scroll-hint {
-    display: none !important;
-  }
-}
-
-
 /* ==============================================================================
  * SCOPED HOMEPAGE STYLING ENHANCEMENTS (Matches Opening Section Aesthetics)
  * Scoped to homepage elements so forms, auth views & dashboards remain unaffected
  * ============================================================================== */
 
 /* Opening Section Action Buttons */
+.opening-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
 .opening-actions .btn {
   display: inline-flex;
   align-items: center;
@@ -1347,6 +1319,47 @@ body.cinema-demo-page {
 }
 
 @media (max-width: 680px) {
+  /* Demo Navigation Elements */
+  .cinema-nav .api-status-pill,
+  .cinema-nav .brand-tag { display: none; }
+  .nav-container { padding: 12px 14px; }
+
+  /* Opening Scene Responsive Scaling */
+  .opening-scene {
+    height: calc(100vh - 108px);
+    height: calc(100svh - 108px);
+    min-height: 440px;
+  }
+  .opening-copy {
+    left: 14px;
+    right: 14px;
+    bottom: 16px;
+    max-width: calc(100vw - 28px);
+  }
+  .opening-title {
+    font-size: clamp(2.1rem, 7.5vw, 2.9rem);
+    margin-bottom: 8px;
+    line-height: 0.95;
+  }
+  .opening-lede {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-width: 30ch;
+  }
+  .opening-actions {
+    gap: 8px;
+    margin-top: 12px !important;
+  }
+  .opening-actions .btn {
+    padding: 9px 18px !important;
+    font-size: 13px !important;
+    min-height: 40px;
+  }
+  .opening-scroll-hint {
+    display: none;
+  }
+
+  /* Main Top Navigation Responsive Layout */
   .nav {
     padding: 10px 14px;
   }
