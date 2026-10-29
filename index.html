@@ -33,9 +33,9 @@
 
     <!-- Favicon & Mobile Theme -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="theme-color" content="#4f46e5">
+    <meta name="theme-color" content="#060607">
 
-    <!-- JSON-LD Structured Data -->
+    <!-- Structured Data (Schema.org JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -85,12 +85,14 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/cinematic.css">
 </head>
 
 <body>
+    <!-- Main Top Navigation -->
     <nav class="nav" aria-label="Main Navigation">
         <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:0">
             <a href="/" class="brand-link" aria-label="Student Admission Portal Home">
@@ -127,13 +129,37 @@
                         </svg>
                     </span>
                 </button>
-                <a class="btn" href="auth.html?role=student#login">Log in</a>
-                <a class="btn pri" href="auth.html?role=student#register">Apply now</a>
+                <a class="btn sm" href="auth.html?role=officer#login" id="btn-nav-officer" style="font-size:13px">Officer</a>
+                <a class="btn sm" href="auth.html?role=admin#login" id="btn-nav-admin" style="font-size:13px">Admin</a>
+                <a class="btn sm" href="auth.html?role=student#login">Log in</a>
+                <a class="btn pri sm" href="auth.html?role=student#register">Apply now</a>
             </div>
         </div>
     </nav>
 
-    <header class="hero">
+    <!-- Opening Section: Procedural Chrome Ribbons & Dynamic Transformation Sequence -->
+    <div class="opening-track" id="opening-track">
+        <section class="opening-scene" data-opening-scene aria-labelledby="opening-title">
+            <canvas class="opening-canvas" aria-hidden="true"></canvas>
+            <div class="opening-scrim" aria-hidden="true"></div>
+            <div class="opening-copy" id="opening-copy">
+                <h1 id="opening-title" class="opening-title">YOUR FUTURE<br>STARTS HERE</h1>
+                <p class="opening-lede">Apply, upload your documents, and track your admission in one place.</p>
+                <div class="opening-actions" style="display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;pointer-events:auto">
+                    <a class="btn pri" href="auth.html?role=student#register" id="btn-opening-register" style="padding:12px 26px;font-size:14.5px;font-weight:700">Apply now →</a>
+                    <a class="btn" href="auth.html?role=student#login" id="btn-opening-login" style="padding:12px 22px;font-size:14.5px;font-weight:600">Student login</a>
+                </div>
+            </div>
+            <!-- Stage Status / Scroll Progress Hint -->
+            <div class="opening-scroll-hint" id="opening-scroll-hint" aria-hidden="true">
+                <span class="scroll-track-bar"><span class="scroll-thumb" id="scroll-thumb"></span></span>
+                <span class="scroll-text" id="stage-text">SCROLL TO EXPLORE TRANSFORMATION ↓</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hero Guidance Header Section -->
+    <header class="hero" style="padding-top:72px">
         <div class="hero-badge">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -143,17 +169,18 @@
             </svg>
             Admissions Open Academic Year 2026–2027
         </div>
-        <h1>Apply, upload documents and track your college admission in one place</h1>
-        <p>Create your student account, complete your academic profile, upload required documents with no application
+        <h2 style="font-size:clamp(1.9rem, 4vw, 2.9rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:14px;color:var(--text-primary)">Apply, upload documents and track your college admission in one place</h2>
+        <p style="max-width:720px;margin:0 auto 28px;color:var(--text-secondary);font-size:15.5px;line-height:1.6">Create your student account, complete your academic profile, upload required documents with no application
             fee required, and monitor your verification status in real time.</p>
         <div class="row" style="justify-content:center;gap:14px">
-            <a class="btn pri" style="padding:13px 28px;font-size:15px" href="auth.html?role=student#register">Create
+            <a class="btn pri" style="padding:13px 28px;font-size:15px;font-weight:700" href="auth.html?role=student#register">Create
                 student account</a>
-            <a class="btn" style="padding:13px 24px;font-size:15px" href="auth.html?role=student#login">Sign in to
+            <a class="btn" style="padding:13px 24px;font-size:15px;font-weight:600" href="auth.html?role=student#login">Sign in to
                 portal</a>
         </div>
     </header>
 
+    <!-- Main Content Wrapper -->
     <main class="wrap" style="padding-top:48px;padding-bottom:60px">
         <section aria-labelledby="portals-heading">
             <h2 id="portals-heading"
@@ -270,6 +297,11 @@
     <dialog id="landing-dialog"></dialog>
     <div id="toasts" aria-live="polite"></div>
 
+    <!-- Three.js Library & Application Scripts -->
+    <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+    </script>
+    <script type="module" src="js/opening-scene.js"></script>
     <script type="module" src="js/theme.js"></script>
     <script type="module" src="js/landing.js"></script>
 </body>
