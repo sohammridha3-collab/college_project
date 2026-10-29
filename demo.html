@@ -21,17 +21,8 @@
 </head>
 
 <body>
-    <!-- Background Canvas Engine (Reflective Ribbons & Particles) -->
-    <div class="canvas-backdrop" aria-hidden="true">
-        <canvas id="ribbon-canvas"></canvas>
-        <canvas id="particle-canvas"></canvas>
-    </div>
-    <div class="cinematic-vignette" aria-hidden="true"></div>
-
-    <!-- Foreground Content Layer -->
-    <div class="cinema-layer">
         <!-- Floating Cinematic Navigation -->
-        <nav class="cinema-nav" aria-label="Cinematic Demo Navigation">
+        <nav class="cinema-nav cinema-nav--floating" aria-label="Cinematic Demo Navigation">
             <div class="nav-container">
                 <a href="demo.html" class="brand-crest" aria-label="Cinematic Admission Portal Demo">
                     <div class="crest-icon-box">
@@ -58,16 +49,30 @@
             </div>
         </nav>
 
-        <!-- Hero Section with Oversized Typography -->
-        <header class="cinema-hero">
+    <!-- Opening Scene Track: Continuous 3-Stage Pinned Scroll Sequence -->
+    <div class="opening-track" id="opening-track">
+        <section class="opening-scene" data-opening-scene aria-labelledby="opening-title">
+            <canvas class="opening-canvas" aria-hidden="true"></canvas>
+            <div class="opening-scrim" aria-hidden="true"></div>
+            <div class="opening-copy" id="opening-copy">
+                <h1 id="opening-title" class="opening-title">YOUR FUTURE<br>STARTS HERE</h1>
+                <p class="opening-lede">Apply, upload your documents, and track your admission in one place.</p>
+            </div>
+            <!-- Stage Status / Scroll Progress Hint -->
+            <div class="opening-scroll-hint" id="opening-scroll-hint" aria-hidden="true">
+                <span class="scroll-track-bar"><span class="scroll-thumb" id="scroll-thumb"></span></span>
+                <span class="scroll-text" id="stage-text">SCROLL TO EXPLORE TRANSFORMATION ↓</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- Foreground Content Layer -->
+    <div class="cinema-layer">
+        <!-- Hero Section (CTAs & telemetry) -->
+        <header class="cinema-hero cinema-hero--after-opening">
             <div class="cinema-kicker">
                 <span class="kicker-flame">🔥</span> Admissions Open Academic Year 2026–2027
             </div>
-
-            <h1 class="cinema-display-title">
-                <span class="text-metallic">FUTURE OF</span><br>
-                <span class="text-fire">ADMISSIONS</span>
-            </h1>
 
             <p class="cinema-subtitle">
                 An isolated cinematic visual scaffold for the <strong>Student Admission Management System</strong>.
@@ -528,7 +533,13 @@
     </div>
 
     <!-- Scripts -->
+    <!-- Three.js is the only external dependency (library from CDN); no external art assets are used -->
+    <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+    </script>
+    <script type="module" src="js/opening-scene.js"></script>
     <script type="module" src="js/cinematic.js"></script>
 </body>
 
 </html>
+

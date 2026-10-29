@@ -1034,3 +1034,194 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+
+
+/* ==============================================================================
+ * OPENING SCENE — chrome ribbons + oversized cream heading
+ * ============================================================================== */
+:root {
+  --opening-bg: #060607;
+  --opening-cream: #f1e7d3;
+  --opening-cream-dim: rgba(241, 231, 211, 0.74);
+}
+
+.cinema-nav--floating {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.cinema-nav--floating .brand-text,
+.cinema-nav--floating .brand-tag,
+.cinema-nav--floating .nav-link,
+.cinema-nav--floating .cinema-btn,
+.cinema-nav--floating .api-status-pill {
+  white-space: nowrap;
+}
+
+.opening-track {
+  position: relative;
+  height: 320vh;
+  width: 100%;
+}
+
+.opening-scene {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--opening-bg);
+  isolation: isolate;
+  z-index: 1;
+}
+
+.opening-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Fallback when WebGL is unavailable: keep the mood without the ribbons */
+.opening-scene.no-webgl {
+  background:
+    radial-gradient(ellipse 60% 50% at 75% 30%, rgba(200, 205, 215, 0.12), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 85% 70%, rgba(255, 90, 30, 0.12), transparent 70%),
+    var(--opening-bg);
+}
+
+/* Readability scrim: darkens only the lower-left text zone + soft frame vignette */
+.opening-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 62% 58% at 14% 88%, rgba(6, 6, 7, 0.88) 0%, rgba(6, 6, 7, 0.55) 45%, transparent 75%),
+    linear-gradient(to top, rgba(6, 6, 7, 0.75) 0%, transparent 32%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.opening-copy {
+  position: absolute;
+  z-index: 2;
+  left: clamp(20px, 5.5vw, 96px);
+  bottom: clamp(40px, 9vh, 110px);
+  max-width: min(92vw, 1100px);
+  pointer-events: none;
+  transform-origin: left bottom;
+  will-change: transform, opacity;
+}
+
+.opening-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 7.6vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: var(--opening-cream);
+  max-width: 7.2em; /* intentional four-line stack: YOUR / FUTURE / STARTS / HERE */
+  margin: 0 0 clamp(16px, 2.4vh, 28px);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
+}
+
+.opening-lede {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.35vw, 1.3rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--opening-cream-dim);
+  max-width: 36ch;
+  margin: 0;
+}
+
+/* Stage & Scroll Progress Hint Pill */
+.opening-scroll-hint {
+  position: absolute;
+  bottom: clamp(24px, 4vh, 44px);
+  right: clamp(20px, 4.5vw, 72px);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(14, 15, 23, 0.75);
+  border: 1px solid var(--cinema-metallic-hairline);
+  border-radius: 9999px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: opacity 0.3s ease;
+}
+
+.scroll-track-bar {
+  width: 48px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cinema-orange), var(--cinema-crimson));
+  border-radius: 9999px;
+  transition: width 0.08s linear;
+}
+
+.scroll-text {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--cinema-text-med);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cinema-hero--after-opening {
+  padding-top: 72px;
+}
+
+@media (max-width: 1440px) {
+  .cinema-nav .nav-links { gap: 16px; }
+  .cinema-nav .api-status-pill { display: none; }
+}
+
+@media (max-width: 1080px) {
+  .cinema-nav .nav-links { display: none; }
+}
+
+@media (max-width: 640px) {
+  .cinema-nav .api-status-pill,
+  .cinema-nav .brand-tag { display: none; }
+  .nav-container { padding: 12px 14px; }
+  .opening-copy { bottom: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-track {
+    height: 100vh !important;
+  }
+  .opening-scene {
+    position: relative !important;
+  }
+  .opening-scroll-hint {
+    display: none !important;
+  }
+}
