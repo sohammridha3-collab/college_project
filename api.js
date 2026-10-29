@@ -5,6 +5,7 @@
  * Local Development Fallback:  http://localhost:3000
  * ============================================================================== */
 
+export const PRODUCTION_FRONTEND_URL = "https://college-project-frontend-9hme.onrender.com";
 export const PRODUCTION_BACKEND_URL = "https://college-project-backend-1.onrender.com";
 export const LOCAL_BACKEND_URL = "http://localhost:3000";
 

@@ -1,5 +1,5 @@
 # robots.txt for Student Admission Portal
-# Canonical Production: https://college-project-backend-1.onrender.com
+# Canonical Frontend: https://college-project-frontend-9hme.onrender.com
 
 User-agent: *
 Allow: /$
@@ -19,5 +19,5 @@ Disallow: /api/
 Disallow: /uploads/
 Disallow: /server/
 
-Sitemap: https://college-project-backend-1.onrender.com/sitemap.xml
+Sitemap: https://college-project-frontend-9hme.onrender.com/sitemap.xml
 

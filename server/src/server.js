@@ -38,6 +38,7 @@ app.use((req, res, next) => {
 
 // CORS configuration supporting credentials and all local dev origins (5500, 5501, 3000, 5173, etc.)
 const defaultOrigins = [
+  "https://college-project-frontend-9hme.onrender.com",
   "https://college-project-backend-1.onrender.com",
   "http://localhost:5173",
   "http://127.0.0.1:5173",
@@ -97,6 +98,14 @@ app.use((req, res, next) => {
     p.startsWith("/server")
   ) {
     res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
+  next();
+});
+
+// Canonical URL header pointing search engines and crawlers to the authoritative public frontend
+app.use((req, res, next) => {
+  if (req.path === "/" || req.path === "/index.html") {
+    res.setHeader("Link", '<https://college-project-frontend-9hme.onrender.com/>; rel="canonical"');
   }
   next();
 });

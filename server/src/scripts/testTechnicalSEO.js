@@ -44,8 +44,8 @@ async function run() {
     "Homepage has accurate meta description"
   );
   assert(
-    indexHtml.includes('<link rel="canonical" href="https://college-project-backend-1.onrender.com/">'),
-    "Homepage specifies canonical production URL"
+    indexHtml.includes('<link rel="canonical" href="https://college-project-frontend-9hme.onrender.com/">'),
+    "Homepage specifies canonical public frontend URL"
   );
   assert(
     indexHtml.includes('<meta name="robots" content="index, follow'),
@@ -55,8 +55,8 @@ async function run() {
     indexHtml.includes('<meta property="og:title"') &&
     indexHtml.includes('<meta property="og:description"') &&
     indexHtml.includes('<meta property="og:image"') &&
-    indexHtml.includes('<meta property="og:url" content="https://college-project-backend-1.onrender.com/">'),
-    "Homepage contains full Open Graph sharing metadata"
+    indexHtml.includes('<meta property="og:url" content="https://college-project-frontend-9hme.onrender.com/">'),
+    "Homepage contains full Open Graph sharing metadata with frontend domain"
   );
   assert(
     indexHtml.includes('<meta name="twitter:card" content="summary_large_image"') &&
@@ -110,17 +110,18 @@ async function run() {
     robotsTxt.includes("Disallow: /auth") &&
     robotsTxt.includes("Disallow: /portal") &&
     robotsTxt.includes("Disallow: /api/") &&
-    robotsTxt.includes("Sitemap: https://college-project-backend-1.onrender.com/sitemap.xml"),
-    "robots.txt disallows private routes and references sitemap.xml"
+    robotsTxt.includes("Sitemap: https://college-project-frontend-9hme.onrender.com/sitemap.xml"),
+    "robots.txt disallows private routes and references frontend sitemap.xml"
   );
 
   const sitemapXml = fs.readFileSync(path.join(rootDir, "sitemap.xml"), "utf8");
   assert(
-    sitemapXml.includes("<loc>https://college-project-backend-1.onrender.com/</loc>") &&
+    sitemapXml.includes("<loc>https://college-project-frontend-9hme.onrender.com/</loc>") &&
     !sitemapXml.includes("localhost") &&
     !sitemapXml.includes("portal.html") &&
-    !sitemapXml.includes("auth.html"),
-    "sitemap.xml lists only canonical public URL and excludes private paths and localhost"
+    !sitemapXml.includes("auth.html") &&
+    !sitemapXml.includes("college-project-backend-1.onrender.com"),
+    "sitemap.xml lists only public frontend canonical URL and excludes private paths and backend URLs"
   );
 
   // 5. Private Page Indexing Protection (HTML meta tag)
@@ -166,6 +167,12 @@ async function run() {
   assert(
     portalHeaderRes.headers.get("x-robots-tag")?.includes("noindex"),
     "/portal endpoint returns X-Robots-Tag: noindex header"
+  );
+
+  const rootRes = await fetch(`${BASE_URL}/`);
+  assert(
+    rootRes.headers.get("link")?.includes("https://college-project-frontend-9hme.onrender.com/"),
+    "Root endpoint sends canonical Link HTTP header pointing to public frontend"
   );
 
   const faviconRes = await fetch(`${BASE_URL}/favicon.svg`);
