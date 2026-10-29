@@ -40,7 +40,7 @@ async function run() {
     "Homepage has descriptive, professional title"
   );
   assert(
-    indexHtml.includes('<meta name="description" content="Apply for admission online,'),
+    /<meta\s+name=["']description["']\s+content=["']Apply for admission online,/i.test(indexHtml),
     "Homepage has accurate meta description"
   );
   assert(
@@ -81,7 +81,7 @@ async function run() {
     "Homepage uses semantic HTML5 container elements (header, nav, main, footer)"
   );
   assert(
-    indexHtml.includes("How the Admission Process Works") &&
+    /How the\s+Admission Process Works/i.test(indexHtml) &&
     indexHtml.includes("No application fee is required"),
     "Public admission guidance accurately reflects the zero application fee policy"
   );
