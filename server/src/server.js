@@ -86,6 +86,37 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Crawler Protection: Inject X-Robots-Tag for private APIs, auth, portals, and documents
+app.use((req, res, next) => {
+  const p = req.path.toLowerCase();
+  if (
+    p.startsWith("/api") ||
+    p.startsWith("/portal") ||
+    p.startsWith("/auth") ||
+    p.startsWith("/uploads") ||
+    p.startsWith("/server")
+  ) {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
+  next();
+});
+
+// Technical SEO endpoints: robots.txt and sitemap.xml
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain");
+  res.sendFile(path.join(clientRoot, "robots.txt"));
+});
+
+app.get("/sitemap.xml", (req, res) => {
+  res.type("application/xml");
+  res.sendFile(path.join(clientRoot, "sitemap.xml"));
+});
+
+// Canonical redirect: consolidate /index.html to root /
+app.get("/index.html", (req, res) => {
+  res.redirect(301, "/");
+});
+
 // Protect internal server directory from direct static exposure
 app.use("/server", (req, res) => res.status(403).send("Forbidden"));
 app.use("/uploads", (req, res) => res.status(404).json({ message: "Not Found" }));

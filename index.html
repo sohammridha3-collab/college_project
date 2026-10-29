@@ -4,7 +4,67 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Admission Portal</title>
+    <title>Student Admission Portal | Online College Admission Management</title>
+    <meta name="description" content="Apply for admission online, upload required academic documents, track application progress in real-time, and receive officer verification updates through the Student Admission Portal.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://college-project-backend-1.onrender.com/">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Student Admission Portal">
+    <meta property="og:title" content="Student Admission Portal | Online College Admission Management">
+    <meta property="og:description" content="Apply for admission online, upload required academic documents, track application progress in real-time, and receive officer verification updates through the Student Admission Portal.">
+    <meta property="og:url" content="https://college-project-backend-1.onrender.com/">
+    <meta property="og:image" content="https://college-project-backend-1.onrender.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Student Admission Portal - Online College Admission Management Interface">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Student Admission Portal | Online College Admission Management">
+    <meta name="twitter:description" content="Apply for admission online, upload required academic documents, track application progress in real-time, and receive officer verification updates through the Student Admission Portal.">
+    <meta name="twitter:image" content="https://college-project-backend-1.onrender.com/og-image.png">
+    <meta name="twitter:image:alt" content="Student Admission Portal - Online College Admission Management">
+
+    <!-- Favicon & Mobile Theme -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="theme-color" content="#4f46e5">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://college-project-backend-1.onrender.com/#website",
+          "url": "https://college-project-backend-1.onrender.com/",
+          "name": "Student Admission Portal",
+          "description": "Online College Admission Management Portal for application submission, document verification, and status tracking.",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://college-project-backend-1.onrender.com/#webapp",
+          "name": "Student Admission Portal",
+          "url": "https://college-project-backend-1.onrender.com/",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "All modern web browsers",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "INR",
+            "description": "No application fee required for student admissions."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Theme Initialization (Prevents FOUC) -->
     <script>
         (function () {
             try {
@@ -17,6 +77,9 @@
             }
         })();
     </script>
+
+    <!-- Preconnect & Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,9 +89,9 @@
 <body>
     <nav class="nav" aria-label="Main Navigation">
         <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:0">
-            <a href="index.html" class="brand-link" aria-label="Student Admission Portal Home">
+            <a href="/" class="brand-link" aria-label="Student Admission Portal Home">
                 <div class="brand-mark">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
                         <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
                     </svg>
@@ -64,11 +127,11 @@
 
     <header class="hero">
         <div class="hero-badge">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
             Admissions Open Academic Year 2026–2027
         </div>
-        <h1>Apply, upload, pay and track your admission in one place</h1>
-        <p>Create an account, complete your application, upload documents, pay the fee securely and follow every decision step in real-time.</p>
+        <h1>Apply, upload documents and track your college admission in one place</h1>
+        <p>Create your student account, complete your academic profile, upload required documents with no application fee required, and monitor your verification status in real time.</p>
         <div class="row" style="justify-content:center;gap:14px">
             <a class="btn pri" style="padding:13px 28px;font-size:15px" href="auth.html?role=student#register">Create student account</a>
             <a class="btn" style="padding:13px 24px;font-size:15px" href="auth.html?role=student#login">Sign in to portal</a>
@@ -76,46 +139,96 @@
     </header>
 
     <main class="wrap" style="padding-top:48px;padding-bottom:60px">
-        <div class="grid" id="roles-grid">
-            <div class="card role-card" id="card-student" data-role="student" tabindex="0" role="region" aria-label="For applicants section">
-                <div>
-                    <span class="role-badge student">Applicant Portal</span>
-                    <div style="font-size:2.2rem;margin-bottom:12px">🎓</div>
-                    <h2>For applicants</h2>
-                    <p style="color:var(--text-secondary)">Fill the application form, upload documents, pay online, submit and track status and notifications in real time.</p>
+        <section aria-labelledby="portals-heading">
+            <h2 id="portals-heading" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Admission Portals by User Role</h2>
+            <div class="grid" id="roles-grid">
+                <div class="card role-card" id="card-student" data-role="student" tabindex="0" role="region" aria-label="For applicants section">
+                    <div>
+                        <span class="role-badge student">Applicant Portal</span>
+                        <div style="font-size:2.2rem;margin-bottom:12px" aria-hidden="true">🎓</div>
+                        <h2>For applicants</h2>
+                        <p style="color:var(--text-secondary)">Complete your admission profile, upload required academic records, submit with no application fee required, and track verification decisions in real time.</p>
+                    </div>
+                    <div class="role-card-footer">
+                        <a class="btn pri sm" href="auth.html?role=student#register" id="btn-card-register">Apply now</a>
+                        <a class="btn sm" href="auth.html?role=student#login" id="btn-card-student-login">Sign in</a>
+                    </div>
                 </div>
-                <div class="role-card-footer">
-                    <a class="btn pri sm" href="auth.html?role=student#register" id="btn-card-register">Apply now</a>
-                    <a class="btn sm" href="auth.html?role=student#login" id="btn-card-student-login">Sign in</a>
-                </div>
-            </div>
 
-            <div class="card role-card" id="card-officer" data-role="officer" tabindex="0" role="region" aria-label="For admission officers section">
-                <div>
-                    <span class="role-badge officer">Staff Portal</span>
-                    <div style="font-size:2.2rem;margin-bottom:12px">📋</div>
-                    <h2>For admission officers</h2>
-                    <p style="color:var(--text-secondary)">Verify documents, review applications, record entrance results, approve or reject with remarks, and run reports.</p>
+                <div class="card role-card" id="card-officer" data-role="officer" tabindex="0" role="region" aria-label="For admission officers section">
+                    <div>
+                        <span class="role-badge officer">Staff Portal</span>
+                        <div style="font-size:2.2rem;margin-bottom:12px" aria-hidden="true">📋</div>
+                        <h2>For admission officers</h2>
+                        <p style="color:var(--text-secondary)">Verify submitted transcripts, evaluate applicant qualifications, record entrance exam scores, and publish admission decisions.</p>
+                    </div>
+                    <div class="role-card-footer">
+                        <a class="btn sm" href="auth.html?role=officer#login" id="btn-card-officer-login">Officer login →</a>
+                    </div>
                 </div>
-                <div class="role-card-footer">
-                    <a class="btn sm" href="auth.html?role=officer#login" id="btn-card-officer-login">Officer login →</a>
-                </div>
-            </div>
 
-            <div class="card role-card" id="card-admin" data-role="admin" tabindex="0" role="region" aria-label="For administrators section">
-                <div>
-                    <span class="role-badge admin">Governance Portal</span>
-                    <div style="font-size:2.2rem;margin-bottom:12px">🛡️</div>
-                    <h2>For administrators</h2>
-                    <p style="color:var(--text-secondary)">Manage students, officers, roles and permissions, system settings, audit logs and comprehensive reports.</p>
-                </div>
-                <div class="role-card-footer">
-                    <a class="btn sm" href="auth.html?role=admin#login" id="btn-card-admin-login">Administrator login →</a>
+                <div class="card role-card" id="card-admin" data-role="admin" tabindex="0" role="region" aria-label="For administrators section">
+                    <div>
+                        <span class="role-badge admin">Governance Portal</span>
+                        <div style="font-size:2.2rem;margin-bottom:12px" aria-hidden="true">🛡️</div>
+                        <h2>For administrators</h2>
+                        <p style="color:var(--text-secondary)">Oversee enrollment metrics, manage officer permissions and system policies, review audit logs, and export reports.</p>
+                    </div>
+                    <div class="role-card-footer">
+                        <a class="btn sm" href="auth.html?role=admin#login" id="btn-card-admin-login">Administrator login →</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <p style="text-align:center;color:var(--text-muted);font-size:14px;margin-top:32px">Already have an account? <a href="auth.html#login" style="font-weight:600">Log in</a> · <a href="auth.html#forgot" style="font-weight:600">Forgot password</a></p>
+        </section>
+
+        <!-- General Admission Process Guidance -->
+        <section aria-labelledby="how-it-works-heading" style="margin-top:56px">
+            <h2 id="how-it-works-heading" style="text-align:center;font-size:1.45rem;margin-bottom:28px">How the Admission Process Works</h2>
+            <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));gap:20px">
+                <div class="card" style="padding:22px">
+                    <div style="font-size:1.8rem;margin-bottom:8px" aria-hidden="true">1️⃣</div>
+                    <h3 style="font-size:1.1rem;margin-bottom:8px">1. Create Student Account</h3>
+                    <p style="color:var(--text-secondary);font-size:14px;line-height:1.5">Register with your email and basic contact details to access your personal admission dashboard.</p>
+                </div>
+                <div class="card" style="padding:22px">
+                    <div style="font-size:1.8rem;margin-bottom:8px" aria-hidden="true">2️⃣</div>
+                    <h3 style="font-size:1.1rem;margin-bottom:8px">2. Fill Academic Application</h3>
+                    <p style="color:var(--text-secondary);font-size:14px;line-height:1.5">Select your program of study and enter your qualifying examination details. No application fee is required.</p>
+                </div>
+                <div class="card" style="padding:22px">
+                    <div style="font-size:1.8rem;margin-bottom:8px" aria-hidden="true">3️⃣</div>
+                    <h3 style="font-size:1.1rem;margin-bottom:8px">3. Upload Required Documents</h3>
+                    <p style="color:var(--text-secondary);font-size:14px;line-height:1.5">Upload certified PDFs of academic transcripts and passport photos directly through our secure file vault.</p>
+                </div>
+                <div class="card" style="padding:22px">
+                    <div style="font-size:1.8rem;margin-bottom:8px" aria-hidden="true">4️⃣</div>
+                    <h3 style="font-size:1.1rem;margin-bottom:8px">4. Track Status & Decision</h3>
+                    <p style="color:var(--text-secondary);font-size:14px;line-height:1.5">Follow officer document verification, entrance exam results, and final admission decisions in real time.</p>
+                </div>
+            </div>
+        </section>
+
+        <p style="text-align:center;color:var(--text-muted);font-size:14px;margin-top:36px">Already have an account? <a href="auth.html?role=student#login" style="font-weight:600">Sign in to your account</a> · <a href="auth.html#forgot" style="font-weight:600">Reset password</a></p>
     </main>
+
+    <!-- Semantic Footer -->
+    <footer style="margin-top:40px;padding:32px 0 24px;border-top:1px solid var(--border-color);color:var(--text-muted);font-size:13.5px">
+        <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-weight:600;color:var(--text-primary)">Student Admission Portal</span>
+                <span>— Academic Year 2026–2027</span>
+            </div>
+            <nav aria-label="Footer Navigation" style="display:flex;gap:18px;flex-wrap:wrap">
+                <a href="auth.html?role=student#register" style="color:var(--text-secondary)">Apply Online</a>
+                <a href="auth.html?role=student#login" style="color:var(--text-secondary)">Applicant Login</a>
+                <a href="auth.html?role=officer#login" style="color:var(--text-secondary)">Officer Login</a>
+                <a href="auth.html?role=admin#login" style="color:var(--text-secondary)">Admin Login</a>
+            </nav>
+        </div>
+        <div class="wrap" style="margin-top:16px;text-align:center;font-size:12px;color:var(--text-muted)">
+            <p style="margin:0">Online College Admission Management System. No application fee required for student admissions.</p>
+        </div>
+    </footer>
 
     <dialog id="landing-dialog"></dialog>
     <div id="toasts" aria-live="polite"></div>
