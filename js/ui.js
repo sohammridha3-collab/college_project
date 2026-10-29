@@ -95,9 +95,59 @@ export const formDialog = (title, fields, values, submit, okText = "Save") => ne
   $("[data-x]", d).onclick = () => fin(false); d.onclose = () => fin(false); d.showModal();
 });
 
-/* Securely previews a protected document via authenticated blob fetch inside a modal dialog. */
-export async function previewDocumentModal(docId, docName = "Document", docType = "") {
+/* Securely previews a protected document via authenticated blob fetch inside a modal dialog.
+   Supports both previewDocumentModal(docId, docName, docType) and previewDocumentModal(blobUrl, mimeType, fileName, downloadFn). */
+export async function previewDocumentModal(arg1, arg2, arg3, arg4) {
   const d = $("#dlg");
+  if (!d) return;
+
+  // Called as previewDocumentModal(blobUrl, mimeType, fileName, downloadFn)
+  if (typeof arg1 === "string" && (arg1.startsWith("blob:") || arg1.startsWith("http") || arg1.startsWith("data:"))) {
+    const blobUrl = arg1;
+    const mimeType = (arg2 || "").toLowerCase();
+    const fileName = arg3 || "Document";
+    const downloadFn = arg4;
+
+    const isImage = mimeType.startsWith("image/") || /\.(jpg|jpeg|png)$/i.test(fileName);
+    const isPdf = mimeType.includes("pdf") || /\.pdf$/i.test(fileName);
+
+    let contentHtml = "";
+    if (isImage) {
+      contentHtml = `<div style="max-height:70vh;overflow:auto;text-align:center;padding:8px"><img src="${blobUrl}" alt="${esc(fileName)}" style="max-width:100%;height:auto;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.1)"></div>`;
+    } else if (isPdf) {
+      contentHtml = `<div style="height:70vh;width:100%"><iframe src="${blobUrl}" style="width:100%;height:100%;border:none;border-radius:6px" title="${esc(fileName)}"></iframe></div>`;
+    } else {
+      contentHtml = `<div class="empty"><p>Preview is not directly embeddable for this format (${esc(mimeType || "file")}).</p></div>`;
+    }
+
+    d.innerHTML = `
+      <div style="min-width:min(90vw, 850px);padding:4px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px">
+          <h2 style="margin:0;font-size:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(fileName)}</h2>
+          <div style="display:flex;gap:8px">
+            ${downloadFn ? '<button type="button" class="btn sm" id="dlg-dl">Download</button>' : ""}
+            <button type="button" class="btn sm ghost" id="dlg-close">Close</button>
+          </div>
+        </div>
+        ${contentHtml}
+      </div>
+    `;
+
+    if (downloadFn) {
+      const dlBtn = $("#dlg-dl", d);
+      if (dlBtn) dlBtn.onclick = () => downloadFn();
+    }
+    const closeBtn = $("#dlg-close", d);
+    if (closeBtn) closeBtn.onclick = () => d.close();
+    d.showModal();
+    return;
+  }
+
+  // Called as previewDocumentModal(docId, docName, docType)
+  const docId = arg1;
+  const docName = arg2 || "Document";
+  const docType = arg3 || "";
+
   d.style.maxWidth = "780px";
   d.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px">
@@ -195,41 +245,4 @@ export function generateVerificationQrSvg(codeString = "ADM-VERIFY") {
   }
   const dim = size * 6 + 12;
   return `<svg width="${dim}" height="${dim}" viewBox="0 0 ${dim} ${dim}" aria-label="Verification code ${esc(codeString)}" role="img" style="border:1px solid var(--border-color);border-radius:8px;background:#fff;color:#0f172a;padding:4px">${cells.join("")}</svg>`;
-}
-
-export function previewDocumentModal(blobUrl, mimeType, fileName = "Document", downloadFn) {
-  const d = $("#dlg");
-  if (!d) return;
-  const isImage = mimeType && mimeType.startsWith("image/");
-  const isPdf = mimeType && mimeType.includes("pdf");
-
-  let contentHtml = "";
-  if (isImage) {
-    contentHtml = `<div style="max-height:70vh;overflow:auto;text-align:center;padding:8px"><img src="${blobUrl}" alt="${esc(fileName)}" style="max-width:100%;height:auto;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.1)"></div>`;
-  } else if (isPdf) {
-    contentHtml = `<div style="height:70vh;width:100%"><iframe src="${blobUrl}" style="width:100%;height:100%;border:none;border-radius:6px" title="${esc(fileName)}"></iframe></div>`;
-  } else {
-    contentHtml = `<div class="empty"><p>Preview is not directly embeddable for this format (${esc(mimeType || "file")}).</p></div>`;
-  }
-
-  d.innerHTML = `
-    <div style="min-width:min(90vw, 850px);padding:4px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px">
-        <h2 style="margin:0;font-size:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(fileName)}</h2>
-        <div style="display:flex;gap:8px">
-          ${downloadFn ? '<button type="button" class="btn sm" id="dlg-dl">Download</button>' : ""}
-          <button type="button" class="btn sm ghost" id="dlg-close">Close</button>
-        </div>
-      </div>
-      ${contentHtml}
-    </div>
-  `;
-
-  if (downloadFn) {
-    const dlBtn = $("#dlg-dl", d);
-    if (dlBtn) dlBtn.onclick = () => downloadFn();
-  }
-  const closeBtn = $("#dlg-close", d);
-  if (closeBtn) closeBtn.onclick = () => d.close();
-  d.showModal();
 }
