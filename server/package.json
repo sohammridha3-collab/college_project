@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node src/server.js",
     "seed": "node src/scripts/seed.js",
-    "test": "node src/scripts/testJourneys.js"
+    "test": "node src/scripts/testJourneys.js",
+    "test:doc-fee": "node src/scripts/testDocumentViewAndFreeFee.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

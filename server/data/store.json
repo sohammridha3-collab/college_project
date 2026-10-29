@@ -527,6 +527,76 @@
       "reset_token": null,
       "reset_token_expires_at": null,
       "created_at": "2026-10-28T04:41:02.808Z"
+    },
+    {
+      "id": 39,
+      "email": "alex_1793250941609@example.com",
+      "password_hash": "$2a$10$I8Uzi8dZwpa3Tvz/s9FaNOWxAmSqYO95sGbu4EPAl/DPxRbXZy23W",
+      "role_id": 3,
+      "status": "active",
+      "reset_token": null,
+      "reset_token_expires_at": null,
+      "created_at": "2026-10-29T05:15:41.877Z"
+    },
+    {
+      "id": 40,
+      "email": "student2_1793250943154@example.com",
+      "password_hash": "$2a$10$sM4lurj0EzsE/.a.KntZY.3czrmfkz3STZJOXh1I3kvZlxXvtYU2C",
+      "role_id": 3,
+      "status": "active",
+      "reset_token": null,
+      "reset_token_expires_at": null,
+      "created_at": "2026-10-29T05:15:43.331Z"
+    },
+    {
+      "id": 41,
+      "email": "alex_1793250988642@example.com",
+      "password_hash": "$2a$10$.n5aQufvwzbznGb59lkjkexMmo5zDj3XbaTtMnvg/U2ULyZfPyFbG",
+      "role_id": 3,
+      "status": "active",
+      "reset_token": null,
+      "reset_token_expires_at": null,
+      "created_at": "2026-10-29T05:16:28.853Z"
+    },
+    {
+      "id": 42,
+      "email": "student2_1793250990020@example.com",
+      "password_hash": "$2a$10$geSBrien0JoWfmxrAFHSie9fBf0a26YS31/ffJflM6J8OpCvY6nAu",
+      "role_id": 3,
+      "status": "active",
+      "reset_token": null,
+      "reset_token_expires_at": null,
+      "created_at": "2026-10-29T05:16:30.156Z"
+    },
+    {
+      "id": 43,
+      "email": "browser_student_1793251045306@example.com",
+      "password_hash": "$2a$10$ky35SnYT.XP2CYNBsaMhJuiC3mcWiCfcj0qU7PakphbCzeWW71yJO",
+      "role_id": 3,
+      "status": "active",
+      "reset_token": null,
+      "reset_token_expires_at": null,
+      "created_at": "2026-10-29T05:17:25.636Z"
+    },
+    {
+      "id": 44,
+      "email": "alex_1793251092458@example.com",
+      "password_hash": "$2a$10$qs7LbSSKgBybiM6QmbH66ufS2lsyNtvFvXCoFtr6g7ZI8ZrZxxs5a",
+      "role_id": 3,
+      "status": "active",
+      "reset_token": null,
+      "reset_token_expires_at": null,
+      "created_at": "2026-10-29T05:18:12.658Z"
+    },
+    {
+      "id": 45,
+      "email": "student2_1793251093783@example.com",
+      "password_hash": "$2a$10$i4wrk0RHVH2PNFNOyxhGIOtK6VLQrzBlYmEwoCdlPj2XaWN4Fy9p6",
+      "role_id": 3,
+      "status": "active",
+      "reset_token": null,
+      "reset_token_expires_at": null,
+      "created_at": "2026-10-29T05:18:13.998Z"
     }
   ],
   "student_profiles": [
@@ -838,6 +908,64 @@
       "full_name": "Bob Vance",
       "phone": "+1 555-0999",
       "created_at": "2026-10-28T04:41:02.811Z"
+    },
+    {
+      "id": 37,
+      "user_id": 39,
+      "full_name": "Alex Rivera",
+      "phone": "+1 555-0144",
+      "created_at": "2026-10-29T05:15:41.883Z",
+      "dob": "2003-08-20",
+      "gender": "Male",
+      "address": "100 University Boulevard"
+    },
+    {
+      "id": 38,
+      "user_id": 40,
+      "full_name": "Bob Vance",
+      "phone": "+1 555-0999",
+      "created_at": "2026-10-29T05:15:43.335Z"
+    },
+    {
+      "id": 39,
+      "user_id": 41,
+      "full_name": "Alex Rivera",
+      "phone": "+1 555-0144",
+      "created_at": "2026-10-29T05:16:28.858Z",
+      "dob": "2003-08-20",
+      "gender": "Male",
+      "address": "100 University Boulevard"
+    },
+    {
+      "id": 40,
+      "user_id": 42,
+      "full_name": "Bob Vance",
+      "phone": "+1 555-0999",
+      "created_at": "2026-10-29T05:16:30.164Z"
+    },
+    {
+      "id": 41,
+      "user_id": 43,
+      "full_name": "Samantha Reed",
+      "phone": "+1 555-0988",
+      "created_at": "2026-10-29T05:17:25.642Z"
+    },
+    {
+      "id": 42,
+      "user_id": 44,
+      "full_name": "Alex Rivera",
+      "phone": "+1 555-0144",
+      "created_at": "2026-10-29T05:18:12.664Z",
+      "dob": "2003-08-20",
+      "gender": "Male",
+      "address": "100 University Boulevard"
+    },
+    {
+      "id": 43,
+      "user_id": 45,
+      "full_name": "Bob Vance",
+      "phone": "+1 555-0999",
+      "created_at": "2026-10-29T05:18:14.009Z"
     }
   ],
   "admission_officers": [
@@ -1403,6 +1531,114 @@
       "submitted_at": null,
       "remarks": null,
       "created_at": "2026-10-28T04:41:02.814Z"
+    },
+    {
+      "id": 37,
+      "user_id": 39,
+      "reference_number": "APP-2026-8950",
+      "program": "Mechanical Engineering B.Sc.",
+      "prev_institution": "Westlake Science Academy",
+      "qualification": "High School Diploma with Honors",
+      "score": 94.2,
+      "statement": "I am passionate about robotics and automotive design.",
+      "status": "Approved",
+      "is_submitted": true,
+      "submitted_at": "2026-10-29T05:15:42.506Z",
+      "remarks": "Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "created_at": "2026-10-29T05:15:41.887Z",
+      "decided_at": "2026-10-29T05:15:42.769Z"
+    },
+    {
+      "id": 38,
+      "user_id": 40,
+      "reference_number": null,
+      "program": null,
+      "prev_institution": null,
+      "qualification": null,
+      "score": null,
+      "statement": null,
+      "status": "Draft",
+      "is_submitted": false,
+      "submitted_at": null,
+      "remarks": null,
+      "created_at": "2026-10-29T05:15:43.341Z"
+    },
+    {
+      "id": 39,
+      "user_id": 41,
+      "reference_number": "APP-2026-7961",
+      "program": "Mechanical Engineering B.Sc.",
+      "prev_institution": "Westlake Science Academy",
+      "qualification": "High School Diploma with Honors",
+      "score": 94.2,
+      "statement": "I am passionate about robotics and automotive design.",
+      "status": "Approved",
+      "is_submitted": true,
+      "submitted_at": "2026-10-29T05:16:29.425Z",
+      "remarks": "Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "created_at": "2026-10-29T05:16:28.863Z",
+      "decided_at": "2026-10-29T05:16:29.738Z"
+    },
+    {
+      "id": 40,
+      "user_id": 42,
+      "reference_number": null,
+      "program": null,
+      "prev_institution": null,
+      "qualification": null,
+      "score": null,
+      "statement": null,
+      "status": "Draft",
+      "is_submitted": false,
+      "submitted_at": null,
+      "remarks": null,
+      "created_at": "2026-10-29T05:16:30.171Z"
+    },
+    {
+      "id": 41,
+      "user_id": 43,
+      "reference_number": null,
+      "program": null,
+      "prev_institution": null,
+      "qualification": null,
+      "score": null,
+      "statement": null,
+      "status": "Draft",
+      "is_submitted": false,
+      "submitted_at": null,
+      "remarks": null,
+      "created_at": "2026-10-29T05:17:25.648Z"
+    },
+    {
+      "id": 42,
+      "user_id": 44,
+      "reference_number": "APP-2026-1383",
+      "program": "Mechanical Engineering B.Sc.",
+      "prev_institution": "Westlake Science Academy",
+      "qualification": "High School Diploma with Honors",
+      "score": 94.2,
+      "statement": "I am passionate about robotics and automotive design.",
+      "status": "Approved",
+      "is_submitted": true,
+      "submitted_at": "2026-10-29T05:18:13.178Z",
+      "remarks": "Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "created_at": "2026-10-29T05:18:12.670Z",
+      "decided_at": "2026-10-29T05:18:13.450Z"
+    },
+    {
+      "id": 43,
+      "user_id": 45,
+      "reference_number": null,
+      "program": null,
+      "prev_institution": null,
+      "qualification": null,
+      "score": null,
+      "statement": null,
+      "status": "Draft",
+      "is_submitted": false,
+      "submitted_at": null,
+      "remarks": null,
+      "created_at": "2026-10-29T05:18:14.017Z"
     }
   ],
   "uploaded_documents": [
@@ -1639,6 +1875,48 @@
       "status": "Verified",
       "remarks": "Official transcript verified and authenticated.",
       "created_at": "2026-10-28T04:41:02.269Z"
+    },
+    {
+      "id": 19,
+      "application_id": 37,
+      "type": "High School Transcript",
+      "original_name": "sample_transcript.pdf",
+      "stored_filename": "doc-1793250942386-386726907.pdf",
+      "file_path": "C:\\Users\\Sayan Mridha\\Desktop\\college_project\\server\\uploads\\doc-1793250942386-386726907.pdf",
+      "file_size": 48,
+      "mime_type": "application/pdf",
+      "status": "Verified",
+      "remarks": "Official transcript verified and authenticated.",
+      "file_data": "JVBERi0xLjQgTW9jayBUcmFuc2NyaXB0IENvbnRlbnQgZm9yIEFsZXggUml2ZXJh",
+      "created_at": "2026-10-29T05:15:42.434Z"
+    },
+    {
+      "id": 20,
+      "application_id": 39,
+      "type": "High School Transcript",
+      "original_name": "sample_transcript.pdf",
+      "stored_filename": "doc-1793250989356-662975922.pdf",
+      "file_path": "C:\\Users\\Sayan Mridha\\Desktop\\college_project\\server\\uploads\\doc-1793250989356-662975922.pdf",
+      "file_size": 48,
+      "mime_type": "application/pdf",
+      "status": "Verified",
+      "remarks": "Official transcript verified and authenticated.",
+      "file_data": "JVBERi0xLjQgTW9jayBUcmFuc2NyaXB0IENvbnRlbnQgZm9yIEFsZXggUml2ZXJh",
+      "created_at": "2026-10-29T05:16:29.368Z"
+    },
+    {
+      "id": 21,
+      "application_id": 42,
+      "type": "High School Transcript",
+      "original_name": "sample_transcript.pdf",
+      "stored_filename": "doc-1793251093107-23568349.pdf",
+      "file_path": "C:\\Users\\Sayan Mridha\\Desktop\\college_project\\server\\uploads\\doc-1793251093107-23568349.pdf",
+      "file_size": 48,
+      "mime_type": "application/pdf",
+      "status": "Verified",
+      "remarks": "Official transcript verified and authenticated.",
+      "file_data": "JVBERi0xLjQgTW9jayBUcmFuc2NyaXB0IENvbnRlbnQgZm9yIEFsZXggUml2ZXJh",
+      "created_at": "2026-10-29T05:18:13.120Z"
     }
   ],
   "application_status_history": [
@@ -2317,6 +2595,114 @@
       "application_id": 36,
       "remarks": null,
       "created_at": "2026-10-28T04:41:02.816Z"
+    },
+    {
+      "id": 98,
+      "application_id": 37,
+      "remarks": null,
+      "created_at": "2026-10-29T05:15:41.893Z"
+    },
+    {
+      "id": 99,
+      "application_id": 37,
+      "remarks": null,
+      "created_at": "2026-10-29T05:15:42.512Z"
+    },
+    {
+      "id": 100,
+      "application_id": "37",
+      "step": "Pass",
+      "status": "Score: 91.5. Notes: Excellent performance in math & physics.",
+      "remarks": 2,
+      "created_at": "2026-10-29T05:15:42.753Z"
+    },
+    {
+      "id": 101,
+      "application_id": "37",
+      "step": "Approved",
+      "status": "Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "remarks": 2,
+      "created_at": "2026-10-29T05:15:42.773Z"
+    },
+    {
+      "id": 102,
+      "application_id": 38,
+      "remarks": null,
+      "created_at": "2026-10-29T05:15:43.346Z"
+    },
+    {
+      "id": 103,
+      "application_id": 39,
+      "remarks": null,
+      "created_at": "2026-10-29T05:16:28.904Z"
+    },
+    {
+      "id": 104,
+      "application_id": 39,
+      "remarks": null,
+      "created_at": "2026-10-29T05:16:29.430Z"
+    },
+    {
+      "id": 105,
+      "application_id": "39",
+      "step": "Pass",
+      "status": "Score: 91.5. Notes: Excellent performance in math & physics.",
+      "remarks": 2,
+      "created_at": "2026-10-29T05:16:29.717Z"
+    },
+    {
+      "id": 106,
+      "application_id": "39",
+      "step": "Approved",
+      "status": "Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "remarks": 2,
+      "created_at": "2026-10-29T05:16:29.744Z"
+    },
+    {
+      "id": 107,
+      "application_id": 40,
+      "remarks": null,
+      "created_at": "2026-10-29T05:16:30.177Z"
+    },
+    {
+      "id": 108,
+      "application_id": 41,
+      "remarks": null,
+      "created_at": "2026-10-29T05:17:25.655Z"
+    },
+    {
+      "id": 109,
+      "application_id": 42,
+      "remarks": null,
+      "created_at": "2026-10-29T05:18:12.675Z"
+    },
+    {
+      "id": 110,
+      "application_id": 42,
+      "remarks": null,
+      "created_at": "2026-10-29T05:18:13.183Z"
+    },
+    {
+      "id": 111,
+      "application_id": "42",
+      "step": "Pass",
+      "status": "Score: 91.5. Notes: Excellent performance in math & physics.",
+      "remarks": 2,
+      "created_at": "2026-10-29T05:18:13.431Z"
+    },
+    {
+      "id": 112,
+      "application_id": "42",
+      "step": "Approved",
+      "status": "Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "remarks": 2,
+      "created_at": "2026-10-29T05:18:13.455Z"
+    },
+    {
+      "id": 113,
+      "application_id": 43,
+      "remarks": null,
+      "created_at": "2026-10-29T05:18:14.026Z"
     }
   ],
   "entrance_exam_results": [
@@ -2436,6 +2822,33 @@
       "exam_date": "2026-10-25",
       "notes": "Excellent performance in math & physics.",
       "created_at": "2026-10-28T04:41:02.474Z"
+    },
+    {
+      "id": 14,
+      "application_id": "37",
+      "score": 91.5,
+      "result": "Pass",
+      "exam_date": "2026-10-25",
+      "notes": "Excellent performance in math & physics.",
+      "created_at": "2026-10-29T05:15:42.749Z"
+    },
+    {
+      "id": 15,
+      "application_id": "39",
+      "score": 91.5,
+      "result": "Pass",
+      "exam_date": "2026-10-25",
+      "notes": "Excellent performance in math & physics.",
+      "created_at": "2026-10-29T05:16:29.712Z"
+    },
+    {
+      "id": 16,
+      "application_id": "42",
+      "score": 91.5,
+      "result": "Pass",
+      "exam_date": "2026-10-25",
+      "notes": "Excellent performance in math & physics.",
+      "created_at": "2026-10-29T05:18:13.426Z"
     }
   ],
   "payment_transactions": [
@@ -3173,18 +3586,129 @@
       "user_id": 38,
       "is_read": false,
       "created_at": "2026-10-28T04:41:02.818Z"
+    },
+    {
+      "id": 80,
+      "user_id": 39,
+      "is_read": false,
+      "created_at": "2026-10-29T05:15:41.898Z"
+    },
+    {
+      "id": 81,
+      "user_id": 39,
+      "title": "Your application #APP-2026-8950 has been received and queued for officer verification.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:15:42.516Z"
+    },
+    {
+      "id": 82,
+      "user_id": 39,
+      "title": "Document Verified: High School Transcript",
+      "message": "Your document \"sample_transcript.pdf\" has been marked as Verified. Remarks: Official transcript verified and authenticated.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:15:42.734Z"
+    },
+    {
+      "id": 83,
+      "user_id": 39,
+      "title": "Admission Decision: Application Approved",
+      "message": "Your admission application #APP-2026-8950 has been approved. Decision remarks: Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:15:42.777Z"
+    },
+    {
+      "id": 84,
+      "user_id": 40,
+      "is_read": false,
+      "created_at": "2026-10-29T05:15:43.350Z"
+    },
+    {
+      "id": 85,
+      "user_id": 41,
+      "is_read": false,
+      "created_at": "2026-10-29T05:16:28.909Z"
+    },
+    {
+      "id": 86,
+      "user_id": 41,
+      "title": "Your application #APP-2026-7961 has been received and queued for officer verification.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:16:29.434Z"
+    },
+    {
+      "id": 87,
+      "user_id": 41,
+      "title": "Document Verified: High School Transcript",
+      "message": "Your document \"sample_transcript.pdf\" has been marked as Verified. Remarks: Official transcript verified and authenticated.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:16:29.689Z"
+    },
+    {
+      "id": 88,
+      "user_id": 41,
+      "title": "Admission Decision: Application Approved",
+      "message": "Your admission application #APP-2026-7961 has been approved. Decision remarks: Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:16:29.749Z"
+    },
+    {
+      "id": 89,
+      "user_id": 42,
+      "is_read": false,
+      "created_at": "2026-10-29T05:16:30.182Z"
+    },
+    {
+      "id": 90,
+      "user_id": 43,
+      "is_read": false,
+      "created_at": "2026-10-29T05:17:25.659Z"
+    },
+    {
+      "id": 91,
+      "user_id": 44,
+      "is_read": false,
+      "created_at": "2026-10-29T05:18:12.680Z"
+    },
+    {
+      "id": 92,
+      "user_id": 44,
+      "title": "Your application #APP-2026-1383 has been received and queued for officer verification.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:18:13.188Z"
+    },
+    {
+      "id": 93,
+      "user_id": 44,
+      "title": "Document Verified: High School Transcript",
+      "message": "Your document \"sample_transcript.pdf\" has been marked as Verified. Remarks: Official transcript verified and authenticated.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:18:13.407Z"
+    },
+    {
+      "id": 94,
+      "user_id": 44,
+      "title": "Admission Decision: Application Approved",
+      "message": "Your admission application #APP-2026-1383 has been approved. Decision remarks: Admitted into Mechanical Engineering B.Sc. with Dean's distinction.",
+      "is_read": false,
+      "created_at": "2026-10-29T05:18:13.460Z"
+    },
+    {
+      "id": 95,
+      "user_id": 45,
+      "is_read": false,
+      "created_at": "2026-10-29T05:18:14.036Z"
     }
   ],
   "system_settings": [
     {
       "id": 1,
       "institution_name": "Metropolitan University of Technology & Sciences",
-      "application_fee": 75,
-      "currency": "USD",
+      "application_fee": 0,
+      "currency": "INR",
       "application_deadline": "2026-12-31",
       "max_upload_mb": 5,
       "registration_open": 1,
-      "policies": "All applicants must submit high school transcripts and verified government ID."
+      "policies": "Admission is completely free for all applicants. All applicants must submit high school transcripts and verified government ID."
     }
   ],
   "audit_logs": [
@@ -4888,6 +5412,366 @@
       "details": "Successful login as student",
       "ip_address": "::1",
       "created_at": "2026-10-28T04:41:03.315Z"
+    },
+    {
+      "id": 190,
+      "user_id": 39,
+      "user_email": "alex_1793250941609@example.com",
+      "action": "USER_REGISTER",
+      "details": "Student account created",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:41.919Z"
+    },
+    {
+      "id": 191,
+      "user_id": 39,
+      "user_email": "alex_1793250941609@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:42.212Z"
+    },
+    {
+      "id": 192,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as officer",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:42.699Z"
+    },
+    {
+      "id": 193,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "DOCUMENT_VERIFY",
+      "details": "Document #19 on App #37 set to Verified",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:42.739Z"
+    },
+    {
+      "id": 194,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "EXAM_RECORD",
+      "details": "Exam result recorded for Application #37: Pass (91.5)",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:42.757Z"
+    },
+    {
+      "id": 195,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "APPLICATION_DECISION",
+      "details": "Application #37 decided as Approved",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:42.781Z"
+    },
+    {
+      "id": 196,
+      "user_id": 1,
+      "user_email": "admin@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as admin",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:43.006Z"
+    },
+    {
+      "id": 197,
+      "user_id": 1,
+      "user_email": "admin@example.com",
+      "action": "SETTINGS_UPDATE",
+      "details": "System settings updated by administrator",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:43.083Z"
+    },
+    {
+      "id": 198,
+      "user_id": 40,
+      "user_email": "student2_1793250943154@example.com",
+      "action": "USER_REGISTER",
+      "details": "Student account created",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:43.354Z"
+    },
+    {
+      "id": 199,
+      "user_id": 40,
+      "user_email": "student2_1793250943154@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:43.527Z"
+    },
+    {
+      "id": 200,
+      "user_id": 40,
+      "user_email": "student2_1793250943154@example.com",
+      "action": "PASSWORD_RESET",
+      "details": "Password reset completed via token",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:43.743Z"
+    },
+    {
+      "id": 201,
+      "user_id": 40,
+      "user_email": "student2_1793250943154@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:15:43.890Z"
+    },
+    {
+      "id": 202,
+      "user_id": 41,
+      "user_email": "alex_1793250988642@example.com",
+      "action": "USER_REGISTER",
+      "details": "Student account created",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:28.924Z"
+    },
+    {
+      "id": 203,
+      "user_id": 41,
+      "user_email": "alex_1793250988642@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:29.234Z"
+    },
+    {
+      "id": 204,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as officer",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:29.633Z"
+    },
+    {
+      "id": 205,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "DOCUMENT_VERIFY",
+      "details": "Document #20 on App #39 set to Verified",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:29.694Z"
+    },
+    {
+      "id": 206,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "EXAM_RECORD",
+      "details": "Exam result recorded for Application #39: Pass (91.5)",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:29.723Z"
+    },
+    {
+      "id": 207,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "APPLICATION_DECISION",
+      "details": "Application #39 decided as Approved",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:29.754Z"
+    },
+    {
+      "id": 208,
+      "user_id": 1,
+      "user_email": "admin@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as admin",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:29.920Z"
+    },
+    {
+      "id": 209,
+      "user_id": 1,
+      "user_email": "admin@example.com",
+      "action": "SETTINGS_UPDATE",
+      "details": "System settings updated by administrator",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:29.974Z"
+    },
+    {
+      "id": 210,
+      "user_id": 42,
+      "user_email": "student2_1793250990020@example.com",
+      "action": "USER_REGISTER",
+      "details": "Student account created",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:30.188Z"
+    },
+    {
+      "id": 211,
+      "user_id": 42,
+      "user_email": "student2_1793250990020@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:30.348Z"
+    },
+    {
+      "id": 212,
+      "user_id": 42,
+      "user_email": "student2_1793250990020@example.com",
+      "action": "PASSWORD_RESET",
+      "details": "Password reset completed via token",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:30.537Z"
+    },
+    {
+      "id": 213,
+      "user_id": 42,
+      "user_email": "student2_1793250990020@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:16:30.693Z"
+    },
+    {
+      "id": 214,
+      "user_id": 43,
+      "user_email": "browser_student_1793251045306@example.com",
+      "action": "USER_REGISTER",
+      "details": "Student account created",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:17:25.676Z"
+    },
+    {
+      "id": 215,
+      "user_id": 43,
+      "user_email": "browser_student_1793251045306@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:17:25.948Z"
+    },
+    {
+      "id": 216,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as officer",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:17:26.127Z"
+    },
+    {
+      "id": 217,
+      "user_id": 1,
+      "user_email": "admin@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as admin",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:17:26.285Z"
+    },
+    {
+      "id": 218,
+      "user_id": 44,
+      "user_email": "alex_1793251092458@example.com",
+      "action": "USER_REGISTER",
+      "details": "Student account created",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:12.694Z"
+    },
+    {
+      "id": 219,
+      "user_id": 44,
+      "user_email": "alex_1793251092458@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:13.012Z"
+    },
+    {
+      "id": 220,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as officer",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:13.364Z"
+    },
+    {
+      "id": 221,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "DOCUMENT_VERIFY",
+      "details": "Document #21 on App #42 set to Verified",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:13.412Z"
+    },
+    {
+      "id": 222,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "EXAM_RECORD",
+      "details": "Exam result recorded for Application #42: Pass (91.5)",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:13.436Z"
+    },
+    {
+      "id": 223,
+      "user_id": 2,
+      "user_email": "officer@example.com",
+      "action": "APPLICATION_DECISION",
+      "details": "Application #42 decided as Approved",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:13.466Z"
+    },
+    {
+      "id": 224,
+      "user_id": 1,
+      "user_email": "admin@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as admin",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:13.631Z"
+    },
+    {
+      "id": 225,
+      "user_id": 1,
+      "user_email": "admin@example.com",
+      "action": "SETTINGS_UPDATE",
+      "details": "System settings updated by administrator",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:13.710Z"
+    },
+    {
+      "id": 226,
+      "user_id": 45,
+      "user_email": "student2_1793251093783@example.com",
+      "action": "USER_REGISTER",
+      "details": "Student account created",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:14.046Z"
+    },
+    {
+      "id": 227,
+      "user_id": 45,
+      "user_email": "student2_1793251093783@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:14.270Z"
+    },
+    {
+      "id": 228,
+      "user_id": 45,
+      "user_email": "student2_1793251093783@example.com",
+      "action": "PASSWORD_RESET",
+      "details": "Password reset completed via token",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:14.534Z"
+    },
+    {
+      "id": 229,
+      "user_id": 45,
+      "user_email": "student2_1793251093783@example.com",
+      "action": "USER_LOGIN",
+      "details": "Successful login as student",
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-29T05:18:14.801Z"
     }
   ]
 }

@@ -77,6 +77,17 @@ export async function initDatabase() {
         const sql = fs.readFileSync(schemaPath, "utf-8");
         const pool = getPool();
         await pool.query(sql);
+
+        // Safe non-destructive migrations for MySQL
+        try {
+          await pool.query(`ALTER TABLE uploaded_documents ADD COLUMN IF NOT EXISTS file_data LONGTEXT NULL;`);
+        } catch {
+          try { await pool.query(`ALTER TABLE uploaded_documents ADD COLUMN file_data LONGTEXT NULL;`); } catch {}
+        }
+        try {
+          await pool.query(`UPDATE system_settings SET application_fee = 0.00, currency = 'INR' WHERE id = 1 AND (application_fee = 75.00 OR application_fee IS NULL);`);
+        } catch {}
+
         console.log("✅ [DB] Connected to MySQL and verified schema tables.");
       }
       return true;

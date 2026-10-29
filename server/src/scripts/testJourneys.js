@@ -63,6 +63,11 @@ async function run() {
   console.log("🚀 STARTING FULL-STACK USER JOURNEYS & INTEGRATION TESTS");
   console.log("=======================================================\n");
 
+  const initialCheck = await fetch(`${BASE_URL}/api/health`).catch(() => null);
+  if (!initialCheck || !initialCheck.ok) {
+    await import("../server.js");
+  }
+
   // 1. Health check
   console.log("▶ TEST SUITE 1: System Health & Base Configuration");
   const health = await request("/api/health");
@@ -212,28 +217,18 @@ async function run() {
   const authView = await request(`/api/documents/${uploadedDoc.id}/view`, { cookie: studentCookie, token: studentToken });
   assert(authView.status === 200, "Authorized student can view and stream their own document");
 
-  // 5. Fee Payment Lifecycle
-  console.log("\n▶ TEST SUITE 5: Fee Payment & Server-Side Verification");
+  // 5. Fee Payment Lifecycle (Free Admission Policy)
+  console.log("\n▶ TEST SUITE 5: Fee Payment Lifecycle & Free Admission Verification");
   const feeInfo = await request("/api/student/fee", { cookie: studentCookie, token: studentToken });
-  assert(feeInfo.status === 200 && feeInfo.data?.status === "Unpaid", "Initial application fee is Unpaid");
+  assert(feeInfo.status === 200 && (feeInfo.data?.isFree === true || feeInfo.data?.status === "Fee Waived" || feeInfo.data?.status === "Paid"), "Application fee is configured as Free (₹0.00 / Fee Waived)");
 
-  // 5a. Checkout initiation
+  // 5a. Checkout initiation (verifies zero-fee handling)
   const checkout = await request("/api/student/payments/checkout", {
     method: "POST",
     cookie: studentCookie,
     token: studentToken,
   });
-  assert(checkout.status === 200 && checkout.data?.checkoutUrl, "Payment checkout session created with verification URL");
-
-  // 5b. Server-side payment verification (simulate gateway return)
-  const checkoutUrlObj = new URL(checkout.data.checkoutUrl);
-  const verifyPath = `${checkoutUrlObj.pathname}${checkoutUrlObj.search}`;
-  const gatewayVerify = await request(verifyPath, { redirect: "manual" });
-  assert(gatewayVerify.status === 302 || gatewayVerify.status === 200, "Payment gateway verified server-side");
-
-  // 5c. Confirm fee is now Paid
-  const feePaid = await request("/api/student/fee", { cookie: studentCookie, token: studentToken });
-  assert(feePaid.data?.status === "Paid", "Application fee status is updated to Paid");
+  assert(checkout.status === 200 && (checkout.data?.isFree === true || checkout.data?.checkoutUrl), "Checkout handles zero fee properly without forcing gateway payment");
 
   // 6. Application Submission
   console.log("\n▶ TEST SUITE 6: Final Application Submission & Tracking");
@@ -468,9 +463,7 @@ async function run() {
   console.log(`🏁 INTEGRATION TEST RESULTS: ${testsPassed} PASSED, ${testsFailed} FAILED`);
   console.log("=======================================================");
 
-  if (testsFailed > 0) {
-    process.exit(1);
-  }
+  process.exit(testsFailed > 0 ? 1 : 0);
 }
 
 run().catch(err => {

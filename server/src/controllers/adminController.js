@@ -340,8 +340,8 @@ export async function getSettings(req, res, next) {
     return res.json({
       settings: {
         institutionName: s.institution_name || "Metropolitan University of Technology",
-        applicationFee: s.application_fee ? Number(s.application_fee).toFixed(2) : "75.00",
-        currency: s.currency || "USD",
+        applicationFee: s.application_fee !== undefined && s.application_fee !== null ? Number(s.application_fee).toFixed(2) : "0.00",
+        currency: s.currency || "INR",
         applicationDeadline: s.application_deadline ? new Date(s.application_deadline).toISOString().split("T")[0] : "",
         maxUploadMb: s.max_upload_mb || 5,
         registrationOpen: Boolean(s.registration_open),
@@ -372,8 +372,8 @@ export async function updateSettings(req, res, next) {
          policies = VALUES(policies)`,
       [
         institutionName,
-        applicationFee ? parseFloat(applicationFee) : 75.0,
-        currency || "USD",
+        applicationFee !== undefined && applicationFee !== null && applicationFee !== "" ? parseFloat(applicationFee) : 0.0,
+        currency || "INR",
         applicationDeadline || null,
         maxUploadMb ? parseInt(maxUploadMb, 10) : 5,
         registrationOpen === true || registrationOpen === "true" || registrationOpen === 1 ? 1 : 0,

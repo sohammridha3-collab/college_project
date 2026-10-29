@@ -12,13 +12,26 @@ if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
+export const DEFAULT_PROGRAMS = [
+  { code: "CS-BSC", name: "Computer Science B.Sc.", department: "School of Computing & AI", seats: 120, duration: "4 Years", minScore: 75 },
+  { code: "DS-BSC", name: "Data Science & AI B.Tech.", department: "School of Computing & AI", seats: 80, duration: "4 Years", minScore: 80 },
+  { code: "ME-BSC", name: "Mechanical Engineering B.Sc.", department: "Faculty of Engineering", seats: 90, duration: "4 Years", minScore: 70 },
+  { code: "EE-BSC", name: "Electrical & Electronics B.Eng.", department: "Faculty of Engineering", seats: 85, duration: "4 Years", minScore: 72 },
+  { code: "BA-BBA", name: "Business Administration B.B.A.", department: "School of Management", seats: 150, duration: "3 Years", minScore: 65 },
+  { code: "BIO-BSC", name: "Biotechnology & Life Sciences B.Sc.", department: "Faculty of Sciences", seats: 60, duration: "4 Years", minScore: 70 }
+];
+
 let store = null;
 
 function saveStore() {
   try {
     fs.writeFileSync(STORE_PATH, JSON.stringify(store, null, 2), "utf-8");
   } catch (err) {
-    console.error("[LocalStore Save Error]", err);
+    try {
+      setTimeout(() => {
+        try { fs.writeFileSync(STORE_PATH, JSON.stringify(store, null, 2), "utf-8"); } catch {}
+      }, 50);
+    } catch {}
   }
 }
 
@@ -26,6 +39,14 @@ export async function initLocalStore() {
   if (fs.existsSync(STORE_PATH)) {
     try {
       store = JSON.parse(fs.readFileSync(STORE_PATH, "utf-8"));
+      // Ensure free admission policy in system_settings if still on legacy USD 75
+      if (store.system_settings && store.system_settings[0]) {
+        if (store.system_settings[0].application_fee === 75 || store.system_settings[0].currency === "USD") {
+          store.system_settings[0].application_fee = 0.00;
+          store.system_settings[0].currency = "INR";
+          saveStore();
+        }
+      }
       return store;
     } catch (e) {}
   }
@@ -91,7 +112,7 @@ export async function initLocalStore() {
       { id: 1, user_id: 3, title: "Welcome to Student Admission Portal", message: "Your demo student account is ready.", is_read: false, created_at: new Date().toISOString() }
     ],
     system_settings: [
-      { id: 1, institution_name: "Metropolitan University of Technology", application_fee: 75.00, currency: "USD", application_deadline: "2026-12-31", max_upload_mb: 5, registration_open: 1, policies: "All applicants must submit high school transcripts and verified government ID." }
+      { id: 1, institution_name: "Metropolitan University of Technology", application_fee: 0.00, currency: "INR", application_deadline: "2026-12-31", max_upload_mb: 5, registration_open: 1, policies: "Admission is completely free for all applicants. All applicants must submit high school transcripts and verified government ID." }
     ],
     audit_logs: [
       { id: 1, user_id: 1, user_email: "admin@example.com", action: "SYSTEM_INIT", details: "Portal initialized", ip_address: "127.0.0.1", created_at: new Date().toISOString() }
@@ -115,7 +136,8 @@ export async function executeLocalQuery(sql, params = []) {
 
   // 2. SELECT * FROM system_settings
   if (/SELECT \* FROM system_settings/i.test(clean) || /SELECT application_fee/i.test(clean)) {
-    return [[store.system_settings[0]], []];
+    const s = store.system_settings[0] || {};
+    return [[{ ...s, amount: s.application_fee }], []];
   }
 
   // 3. UPDATE system_settings / INSERT ON DUPLICATE KEY UPDATE
@@ -338,10 +360,19 @@ export async function executeLocalQuery(sql, params = []) {
   // 13. Uploaded documents
   if (/INSERT INTO uploaded_documents/i.test(clean)) {
     const nextId = Math.max(0, ...store.uploaded_documents.map(d => d.id)) + 1;
+    let status = "Pending";
+    let fileData = null;
+    if (params.length >= 9) {
+      status = params[7] || "Pending";
+      fileData = params[8] || null;
+    } else {
+      status = "Pending";
+      fileData = params[7] || null;
+    }
     const doc = {
       id: nextId, application_id: params[0], type: params[1], original_name: params[2],
       stored_filename: params[3], file_path: params[4], file_size: params[5], mime_type: params[6],
-      status: params[7] || "Pending", remarks: null, created_at: new Date().toISOString()
+      status, remarks: null, file_data: fileData, created_at: new Date().toISOString()
     };
     store.uploaded_documents.push(doc);
     saveStore();
@@ -349,13 +380,13 @@ export async function executeLocalQuery(sql, params = []) {
   }
   if (/SELECT.*FROM uploaded_documents/i.test(clean)) {
     let docs = store.uploaded_documents.map(d => {
-      const app = store.admission_applications.find(a => a.id === d.application_id);
-      const sp = app ? store.student_profiles.find(p => p.user_id === app.user_id) : null;
+      const app = store.admission_applications.find(a => String(a.id) === String(d.application_id));
+      const sp = app ? store.student_profiles.find(p => String(p.user_id) === String(app.user_id)) : null;
       return {
         id: d.id, applicationId: d.application_id, application_id: d.application_id, user_id: app?.user_id,
         applicantName: sp?.full_name || "Applicant", type: d.type, name: d.original_name,
         original_name: d.original_name, stored_filename: d.stored_filename, file_path: d.file_path,
-        file_size: d.file_size, mime_type: d.mime_type, status: d.status, remarks: d.remarks
+        file_size: d.file_size, mime_type: d.mime_type, status: d.status, remarks: d.remarks, file_data: d.file_data || null
       };
     });
     const hasDocId = /\b(?:d\.)?id\s*=\s*\?/i.test(clean);

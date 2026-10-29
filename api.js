@@ -98,6 +98,7 @@ export const ENDPOINTS = {
     documents: "/student/documents",
     document: id => `/student/documents/${id}`,
     documentView: id => `/documents/${id}/view`,
+    documentDownload: id => `/documents/${id}/download`,
     fee: "/student/fee",
     checkout: "/student/payments/checkout",
     notifications: "/student/notifications",

@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS uploaded_documents (
   mime_type VARCHAR(100) NOT NULL,
   status ENUM('Pending', 'Verified', 'Rejected') DEFAULT 'Pending',
   remarks TEXT NULL,
+  file_data LONGTEXT NULL,
   verified_by INT NULL,
   verified_at TIMESTAMP NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -176,8 +177,8 @@ CREATE TABLE IF NOT EXISTS notifications (
 CREATE TABLE IF NOT EXISTS system_settings (
   id INT PRIMARY KEY DEFAULT 1,
   institution_name VARCHAR(200) DEFAULT 'Metropolitan University of Technology',
-  application_fee DECIMAL(10,2) DEFAULT 75.00,
-  currency VARCHAR(10) DEFAULT 'USD',
+  application_fee DECIMAL(10,2) DEFAULT 0.00,
+  currency VARCHAR(10) DEFAULT 'INR',
   application_deadline DATE DEFAULT '2026-12-31',
   max_upload_mb INT DEFAULT 5,
   registration_open BOOLEAN DEFAULT TRUE,

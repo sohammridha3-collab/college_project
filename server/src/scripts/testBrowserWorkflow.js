@@ -76,6 +76,11 @@ class BrowserClient {
 }
 
 async function runBrowserSimulation() {
+  const initialCheck = await fetch(`${BASE_URL}/api/health`).catch(() => null);
+  if (!initialCheck || !initialCheck.ok) {
+    await import("../server.js");
+  }
+
   console.log("=======================================================");
   console.log("🧪 TESTING REGISTRATION & LOGIN TO DASHBOARD WORKFLOWS");
   console.log("=======================================================\n");
@@ -158,7 +163,7 @@ async function runBrowserSimulation() {
   console.log(`🏁 WORKFLOW TEST RESULTS: ${passed} PASSED, ${failed} FAILED`);
   console.log("=======================================================");
 
-  if (failed > 0) process.exit(1);
+  process.exit(failed > 0 ? 1 : 0);
 }
 
 runBrowserSimulation().catch(err => {

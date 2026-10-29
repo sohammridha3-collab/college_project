@@ -38,7 +38,7 @@
   --badge-warn-tx: #b45309;
   --badge-bad-bg: rgba(244, 63, 94, 0.12);
   --badge-bad-tx: #be123c;
-
+  
   /* Backward-compatible legacy aliases */
   --navy: #0f172a;
   --navy2: #1e293b;
@@ -102,9 +102,7 @@
 }
 
 /* ---------- BASE & RESET ---------- */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -134,10 +132,7 @@ body {
     radial-gradient(circle at 85% 85%, rgba(14, 165, 233, 0.08) 0, transparent 50%);
 }
 
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
   color: var(--text-primary);
   margin: 0 0 0.6em;
   font-weight: 700;
@@ -145,24 +140,15 @@ h4 {
   letter-spacing: -0.02em;
 }
 
-h1 {
-  font-size: 1.75rem;
-}
-
-h2 {
-  font-size: 1.25rem;
-}
-
-h3 {
-  font-size: 1.05rem;
-}
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
 
 a {
   color: var(--accent-primary);
   text-decoration: none;
   transition: color 0.15s ease;
 }
-
 a:hover {
   color: var(--accent-hover);
 }
@@ -180,7 +166,6 @@ a:hover {
   position: absolute;
   left: -999px;
 }
-
 .skip:focus {
   left: 12px;
   top: 12px;
@@ -211,9 +196,9 @@ a:hover {
   box-shadow: var(--shadow-btn);
   position: relative;
   transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.18s ease,
-    border-color 0.18s ease;
+              box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.18s ease,
+              border-color 0.18s ease;
 }
 
 .btn:hover {
@@ -303,9 +288,9 @@ a:hover {
   box-shadow: var(--shadow-btn);
   position: relative;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.2s ease,
-    color 0.2s ease;
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              color 0.2s ease;
 }
 
 .theme-toggle:hover {
@@ -335,21 +320,10 @@ a:hover {
 }
 
 /* Instant CSS-driven icon switching */
-[data-theme="light"] .theme-toggle .sun-icon {
-  display: none !important;
-}
-
-[data-theme="light"] .theme-toggle .moon-icon {
-  display: inline-flex !important;
-}
-
-[data-theme="dark"] .theme-toggle .sun-icon {
-  display: inline-flex !important;
-}
-
-[data-theme="dark"] .theme-toggle .moon-icon {
-  display: none !important;
-}
+[data-theme="light"] .theme-toggle .sun-icon { display: none !important; }
+[data-theme="light"] .theme-toggle .moon-icon { display: inline-flex !important; }
+[data-theme="dark"] .theme-toggle .sun-icon { display: inline-flex !important; }
+[data-theme="dark"] .theme-toggle .moon-icon { display: none !important; }
 
 /* ---------- 3D CARDS & SURFACES ---------- */
 .card {
@@ -363,8 +337,8 @@ a:hover {
   box-shadow: var(--shadow-card);
   position: relative;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.25s ease;
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
 }
 
 .card:hover {
@@ -424,9 +398,7 @@ a:hover {
   cursor: pointer;
 }
 
-input,
-select,
-textarea {
+input, select, textarea {
   width: 100%;
   padding: 11px 14px;
   border: 1px solid var(--border-input);
@@ -439,15 +411,12 @@ textarea {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder, textarea::placeholder {
   color: var(--text-muted);
   opacity: 0.8;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+input:focus, select:focus, textarea:focus {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px var(--accent-light), inset 0 1px 2px rgba(0, 0, 0, 0.02);
@@ -500,8 +469,7 @@ table {
   border-spacing: 0;
 }
 
-th,
-td {
+th, td {
   padding: 13px 16px;
   text-align: left;
   border-bottom: 1px solid var(--border-subtle);
@@ -517,17 +485,9 @@ th {
   letter-spacing: 0.05em;
 }
 
-th:first-child {
-  border-top-left-radius: 14px;
-}
-
-th:last-child {
-  border-top-right-radius: 14px;
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
+th:first-child { border-top-left-radius: 14px; }
+th:last-child { border-top-right-radius: 14px; }
+tr:last-child td { border-bottom: none; }
 
 tbody tr {
   transition: background 0.15s ease;
@@ -607,9 +567,7 @@ tbody tr:hover {
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(1turn);
-  }
+  to { transform: rotate(1turn); }
 }
 
 .err {
@@ -769,7 +727,6 @@ main {
     transform: translateY(16px);
     opacity: 0;
   }
-
   to {
     transform: translateY(0);
     opacity: 1;
@@ -1001,7 +958,6 @@ dd {
   .shell {
     grid-template-columns: 1fr;
   }
-
   .side {
     position: fixed;
     left: 0;
@@ -1011,19 +967,15 @@ dd {
     transform: translateX(-100%);
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
   .side.open {
     transform: none;
   }
-
   #menu {
     display: inline-flex;
   }
-
   .hero h1 {
     font-size: 2.1rem;
   }
-
   main {
     padding: 24px 18px;
   }
@@ -1033,109 +985,97 @@ dd {
   .hero {
     padding: 70px 18px;
   }
-
   .hero h1 {
     font-size: 1.8rem;
   }
-
   .authbox {
     margin: 3vh auto;
     padding: 0 14px;
   }
-
   .top {
     padding: 12px 16px;
   }
-
   dl {
     grid-template-columns: 1fr;
     gap: 4px 0;
   }
-
   dt {
     font-weight: 600;
     margin-top: 8px;
   }
-
   .nav {
     padding: 14px 16px;
   }
+/* ---------- ROLE CARDS ON LANDING PAGE ---------- */
+.role-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+}
 
-  /* ---------- ROLE CARDS ON LANDING PAGE ---------- */
-  .role-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 16px;
-    position: relative;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-  }
+.role-card:hover, .role-card:focus-within {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--accent-primary);
+}
 
-  .role-card:hover,
-  .role-card:focus-within {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-card-hover);
-    border-color: var(--accent-primary);
-  }
+.role-card h2 {
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+  font-weight: 700;
+}
 
-  .role-card h2 {
-    font-size: 1.35rem;
-    margin: 0 0 8px;
-    font-weight: 700;
-  }
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  width: fit-content;
+  margin-bottom: 12px;
+}
 
-  .role-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 4px 10px;
-    border-radius: 9999px;
-    width: fit-content;
-    margin-bottom: 12px;
-  }
+.role-badge.student {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
 
-  .role-badge.student {
-    background: rgba(16, 185, 129, 0.12);
-    color: #059669;
-  }
+.role-badge.officer {
+  background: rgba(79, 70, 229, 0.12);
+  color: var(--accent-primary);
+}
 
-  .role-badge.officer {
-    background: rgba(79, 70, 229, 0.12);
-    color: var(--accent-primary);
-  }
+.role-badge.admin {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
 
-  .role-badge.admin {
-    background: rgba(245, 158, 11, 0.12);
-    color: #d97706;
-  }
+.role-card-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-  .role-card-footer {
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border-subtle);
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+/* ---------- ACCESSIBILITY: REDUCED MOTION ---------- */
 
-  /* ---------- ACCESSIBILITY: REDUCED MOTION ---------- */
-
-  @media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

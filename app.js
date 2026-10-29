@@ -1,5 +1,5 @@
-import { api, ENDPOINTS as E, MAX_UPLOAD_MB, clearToken } from "./api.js";
-import { $, esc, toast, confirmDialog, formDialog, fieldsHtml, readForm, loading, errorBox, empty, badge, icons, initThemeToggle } from "./ui.js";
+import { api, API_BASE_URL, ENDPOINTS as E, MAX_UPLOAD_MB, clearToken } from "./api.js";
+import { $, esc, toast, confirmDialog, formDialog, previewDocumentModal, fieldsHtml, readForm, loading, errorBox, empty, badge, icons, initThemeToggle } from "./ui.js";
 import { getMe, logout } from "./auth.js";
 
 const F = (name, label, type = "text", req = true, opt, attrs) => ({ name, label, type, req, opt, attrs });
@@ -88,6 +88,57 @@ async function appForm(el) {
   $("[data-d]", b).onclick = e => act(e.currentTarget, () => api.put(E.student.application, { ...Object.fromEntries(new FormData(f)), draft: true }), "Draft saved");
   f.onsubmit = async e => { e.preventDefault(); const d = readForm(f); if (d && await act($("button.pri", f), () => api.put(E.student.application, d), "Application saved")) location.hash = "#/documents"; };
 }
+async function viewDoc(row) {
+  const docId = row.id;
+  const fileName = row.name || row.original_name || row.type || "Document";
+  const token = typeof window !== "undefined" ? (localStorage.getItem("portal_token") || sessionStorage.getItem("portal_token")) : null;
+
+  const win = window.open("about:blank", "_blank");
+  if (win) {
+    try {
+      win.document.write(`<title>${esc(fileName)}</title><body style="margin:0;background:#0f172a;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#f8fafc"><p>Loading document preview...</p></body>`);
+    } catch {}
+  }
+
+  try {
+    const blob = await api.blob(`/documents/${docId}/view`);
+    const blobUrl = URL.createObjectURL(blob);
+    if (win && !win.closed) {
+      win.location.href = blobUrl;
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 120000);
+    } else {
+      previewDocumentModal(blobUrl, blob.type, fileName, () => downloadDoc(row));
+    }
+  } catch (err) {
+    if (win && !win.closed) win.close();
+    if (token) {
+      const directUrl = `${API_BASE_URL.replace(/\/api$/, "")}/api/documents/${docId}/view?token=${encodeURIComponent(token)}`;
+      window.open(directUrl, "_blank");
+    } else {
+      toast(err.message || "Failed to load document.", "err");
+    }
+  }
+}
+
+async function downloadDoc(row) {
+  const docId = row.id;
+  const fileName = row.name || row.original_name || `${row.type || "document"}.pdf`;
+  try {
+    toast("Preparing download...", "info");
+    const blob = await api.blob(`/documents/${docId}/download`);
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 30000);
+  } catch (err) {
+    toast(err.message || "Failed to download document.", "err");
+  }
+}
+
 const DOCS = ["ID proof", "Academic transcript", "Passport photo", "Certificate", "Other"];
 const docs = el => load(el, "Documents", E.student.documents, (r, b) => {
   const it = r.items || [];
@@ -114,20 +165,39 @@ const docs = el => load(el, "Documents", E.student.documents, (r, b) => {
   };
   if (!it.length) $("#dt", b).innerHTML = empty("No documents yet", "Upload the documents required for your application.");
   else table($("#dt", b), [["type", "Type"], ["name", "File"], ["status", "Status", badge], ["remarks", "Officer remarks"]], it, r2 => [
-    ["View", row => window.open(`${API_BASE_URL.replace(/\/api$/, "")}/api/documents/${row.id}/view`, "_blank")],
+    ["View", row => viewDoc(row)],
+    ["Download", row => downloadDoc(row)],
     ["Delete", async (row, btn) => { const x = await confirmDialog("Delete document?", row.name || row.type, { danger: true, ok: "Delete" }); if (x && await act(btn, () => api.del(E.student.document(row.id)), "Document deleted")) docs(el); }, "danger"]
   ]);
 });
 const pay = el => load(el, "Application fee", E.student.fee, (r, b) => {
+  const isFree = Number(r.amount) <= 0 || r.isFree || /waived|free/i.test(r.status);
   const paid = /paid/i.test(r.status);
-  b.innerHTML = `<div class="card"><dl><dt>Amount</dt><dd>${esc(r.currency || "")} ${esc(r.amount)}</dd><dt>Status</dt><dd>${badge(r.status)}</dd></dl><p>You will be redirected to our secure payment provider. Card details are never entered on this site.</p><button class="btn pri" ${paid ? "disabled" : ""}>${paid ? "Fee paid" : "Pay securely"}</button></div>`;
+  if (isFree && !paid) {
+    b.innerHTML = `
+      <div class="card">
+        <dl>
+          <dt>Amount</dt><dd><b style="color:var(--accent-primary)">FREE (₹0.00)</b></dd>
+          <dt>Status</dt><dd>${badge("Fee Waived")}</dd>
+        </dl>
+        <p style="color:var(--text-secondary);margin:14px 0">
+          <b>No application fee required.</b> Metropolitan University has waived all application fees for applicants. You can proceed directly to complete your application and upload documents.
+        </p>
+        <div>
+          <a href="#/submit" class="btn pri">Proceed to Submit Application</a>
+        </div>
+      </div>
+    `;
+    return;
+  }
+  b.innerHTML = `<div class="card"><dl><dt>Amount</dt><dd>${esc(r.currency === 'INR' ? '₹' : r.currency || "")} ${esc(r.amount)}</dd><dt>Status</dt><dd>${badge(r.status)}</dd></dl><p>You will be redirected to our secure payment provider. Card details are never entered on this site.</p><button class="btn pri" ${paid ? "disabled" : ""}>${paid ? "Fee paid" : "Pay securely"}</button></div>`;
   $("button", b).onclick = async e => {
     const x = await act(e.currentTarget, () => api.post(E.student.checkout, {}));
-    if (x && x.checkoutUrl) location.href = x.checkoutUrl; else if (x) toast("The server did not return a checkout URL.", "err");
+    if (x && x.checkoutUrl) location.href = x.checkoutUrl; else if (x) toast(x.message || "The server did not return a checkout URL.", "err");
   };
 });
 function submit(el) {
-  el.innerHTML = '<h1>Submit application</h1><div class="card" id="b"><p>Check your application details, documents and fee payment first. After submission you cannot edit your application.</p><button class="btn pri">Submit application</button></div>';
+  el.innerHTML = '<h1>Submit application</h1><div class="card" id="b"><p>Check your application details and uploaded documents first. (No application fee required.) After submission you cannot edit your application.</p><button class="btn pri">Submit application</button></div>';
   $("button", el).onclick = async e => {
     const ok = await confirmDialog("Submit application?", "This is final. The admissions office will start verification.", { ok: "Submit" }); if (!ok) return;
     const r = await act(e.currentTarget, () => api.post(E.student.submit, {})); if (!r) return;
@@ -185,7 +255,8 @@ const verifyDoc = async (appId, d, st, done) => {
   if (x && await act(null, () => api.post(E.officer.verifyDocument(appId, d.id), { status: isOk ? "verified" : isCorr ? "correction" : "rejected", remarks: x.remarks }), "Document updated")) done();
 };
 const docActs = (appIdOf, done) => r => [
-  ["View", row => window.open(`${API_BASE_URL.replace(/\/api$/, "")}/api/documents/${row.id}/view`, "_blank")],
+  ["View", row => viewDoc(row)],
+  ["Download", row => downloadDoc(row)],
   ["Verify", () => verifyDoc(appIdOf(r), r, "verified", done)],
   ["Needs Correction", () => verifyDoc(appIdOf(r), r, "correction", done), "warn"],
   ["Reject", () => verifyDoc(appIdOf(r), r, "rejected", done), "danger"]

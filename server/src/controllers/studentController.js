@@ -34,16 +34,27 @@ export async function getDashboard(req, res, next) {
       [app.id]
     );
 
+    const [settings] = await pool.query(`SELECT application_fee, currency FROM system_settings WHERE id = 1 LIMIT 1`);
+    const feeConfig = settings[0] || { application_fee: 0, currency: "INR" };
+    const isFeeFree = Number(feeConfig.application_fee) <= 0;
+
     const [unread] = await pool.query(
       `SELECT COUNT(*) AS count FROM notifications WHERE user_id = ? AND is_read = FALSE`,
       [req.user.id]
     );
 
+    let feeStatusText = "Pending";
+    if (payment.length) {
+      feeStatusText = "Paid";
+    } else if (isFeeFree) {
+      feeStatusText = "Fee Waived";
+    }
+
     return res.json({
       stats: {
         "Application Status": app.status,
         "Documents Uploaded": `${docCount[0].total}`,
-        "Fee Payment": payment.length ? "Paid" : "Pending",
+        "Fee Payment": feeStatusText,
         "Unread Notifications": `${unread[0].count}`,
       },
     });
@@ -164,13 +175,19 @@ export async function submitApplication(req, res, next) {
       return res.status(422).json({ message: "Please upload at least one required document before submitting." });
     }
 
-    // Check fee payment
-    const [txs] = await pool.query(
-      `SELECT id FROM payment_transactions WHERE application_id = ? AND status = 'Paid' LIMIT 1`,
-      [app.id]
+    // Check fee payment only if fee is configured (> 0)
+    const [settings] = await pool.query(
+      `SELECT application_fee FROM system_settings WHERE id = 1 LIMIT 1`
     );
-    if (!txs.length) {
-      return res.status(422).json({ message: "Please complete the application fee payment before final submission." });
+    const feeAmount = settings[0]?.application_fee ?? 0;
+    if (Number(feeAmount) > 0) {
+      const [txs] = await pool.query(
+        `SELECT id FROM payment_transactions WHERE application_id = ? AND status = 'Paid' LIMIT 1`,
+        [app.id]
+      );
+      if (!txs.length) {
+        return res.status(422).json({ message: "Please complete the application fee payment before final submission." });
+      }
     }
 
     const ref = `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -284,9 +301,15 @@ export async function uploadDocument(req, res, next) {
     const pool = getPool();
     const app = await getStudentApp(req.user.id);
 
+    // Read file buffer for persistent backup (protects against ephemeral filesystem resets on redeploy)
+    let fileBuffer = null;
+    try {
+      fileBuffer = fs.readFileSync(req.file.path);
+    } catch {}
+
     await pool.query(
-      `INSERT INTO uploaded_documents (application_id, type, original_name, stored_filename, file_path, file_size, mime_type, status)
-       VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending')`,
+      `INSERT INTO uploaded_documents (application_id, type, original_name, stored_filename, file_path, file_size, mime_type, status, file_data)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         app.id,
         type,
@@ -295,6 +318,8 @@ export async function uploadDocument(req, res, next) {
         req.file.path,
         req.file.size,
         req.file.mimetype,
+        "Pending",
+        fileBuffer ? fileBuffer.toString("base64") : null
       ]
     );
 
@@ -340,17 +365,26 @@ export async function getFee(req, res, next) {
     const [settings] = await pool.query(
       `SELECT application_fee AS amount, currency FROM system_settings WHERE id = 1 LIMIT 1`
     );
-    const feeConfig = settings[0] || { amount: 75.0, currency: "USD" };
+    const feeConfig = settings[0] || { amount: 0.0, currency: "INR" };
+    const rawAmount = feeConfig.amount !== undefined ? feeConfig.amount : (feeConfig.application_fee !== undefined ? feeConfig.application_fee : 0);
+    const isFree = Number(rawAmount) <= 0;
 
     const [txs] = await pool.query(
-      `SELECT status FROM payment_transactions WHERE application_id = ? AND status = 'Paid' LIMIT 1`,
+      `SELECT status, amount, currency, transaction_reference, paid_at FROM payment_transactions WHERE application_id = ? AND status = 'Paid' LIMIT 1`,
       [app.id]
     );
 
+    const currencySymbol = (feeConfig.currency === "INR" || !feeConfig.currency) ? "₹" : feeConfig.currency;
+    const formattedAmount = isFree ? "0.00" : Number(rawAmount).toFixed(2);
+
     return res.json({
-      amount: Number(feeConfig.amount).toFixed(2),
-      currency: feeConfig.currency,
-      status: txs.length ? "Paid" : "Unpaid",
+      amount: formattedAmount,
+      currency: feeConfig.currency || "INR",
+      currencySymbol,
+      displayAmount: isFree ? "FREE (₹0.00)" : `${currencySymbol} ${formattedAmount}`,
+      isFree,
+      status: txs.length ? "Paid" : (isFree ? "Fee Waived" : "Unpaid"),
+      transaction: txs[0] || null,
     });
   } catch (err) {
     next(err);
@@ -365,7 +399,15 @@ export async function checkoutFee(req, res, next) {
     const [settings] = await pool.query(
       `SELECT application_fee AS amount, currency FROM system_settings WHERE id = 1 LIMIT 1`
     );
-    const feeConfig = settings[0] || { amount: 75.0, currency: "USD" };
+    const feeConfig = settings[0] || { amount: 0.0, currency: "INR" };
+    const rawAmount = feeConfig.amount !== undefined ? feeConfig.amount : (feeConfig.application_fee !== undefined ? feeConfig.application_fee : 0);
+
+    if (Number(rawAmount) <= 0) {
+      return res.json({
+        message: "No application fee required. Your admission application is completely free.",
+        isFree: true,
+      });
+    }
 
     const host = req.get("host");
     const protocol = req.protocol;
@@ -373,7 +415,7 @@ export async function checkoutFee(req, res, next) {
 
     const session = await activePaymentGateway.createCheckoutSession({
       applicationId: app.id,
-      amount: feeConfig.amount,
+      amount: rawAmount,
       currency: feeConfig.currency,
       clientBaseUrl,
     });
